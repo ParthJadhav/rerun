@@ -292,7 +292,7 @@ fn test_encode_decode() {
     use crate::{BeginRecordingMsg, LogMsg, RowId, Time};
 
     let messages = vec![LogMsg::BeginRecordingMsg(BeginRecordingMsg {
-        table_id: RowId::random(),
+        row_id: RowId::random(),
         info: crate::RecordingInfo {
             application_id: crate::ApplicationId("test".to_owned()),
             recording_id: crate::RecordingId::random(),

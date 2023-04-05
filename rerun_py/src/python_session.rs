@@ -2,7 +2,7 @@ use std::net::SocketAddr;
 
 use re_log_types::{
     ApplicationId, BeginRecordingMsg, LogMsg, PathOp, RecordingId, RecordingInfo, RecordingSource,
-    TableId, Time, TimePoint,
+    RowId, Time, TimePoint,
 };
 
 use rerun::sink::LogSink;
@@ -214,7 +214,7 @@ impl PythonSession {
 
                 self.sink.send(
                     BeginRecordingMsg {
-                        table_id: TableId::random(),
+                        row_id: RowId::random(),
                         info,
                     }
                     .into(),
@@ -229,7 +229,7 @@ impl PythonSession {
     /// Send a [`PathOp`].
     pub fn send_path_op(&mut self, time_point: &TimePoint, path_op: PathOp) {
         self.send(LogMsg::EntityPathOpMsg(re_log_types::EntityPathOpMsg {
-            table_id: TableId::random(),
+            row_id: RowId::random(),
             time_point: time_point.clone(),
             path_op,
         }));

@@ -162,7 +162,6 @@ impl std::ops::IndexMut<usize> for DataCellRow {
 pub struct DataRow {
     /// Auto-generated `TUID`, uniquely identifying this event and keeping track of the client's
     /// wall-clock.
-    // TODO(#1619): introduce RowId & TableId
     pub row_id: RowId,
 
     /// User-specified [`TimePoint`] for this event.
@@ -258,7 +257,7 @@ impl DataRow {
     #[doc(hidden)]
     #[inline]
     pub fn into_table(self) -> DataTable {
-        DataTable::from_rows(self.row_id, [self])
+        DataTable::from_rows(self.row_id.into_table_id(), [self])
     }
 }
 

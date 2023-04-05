@@ -1,5 +1,5 @@
 use re_data_store::{log_db::LogDb, InstancePath};
-use re_log_types::{ComponentPath, EntityPath, TableId, TimeInt, Timeline};
+use re_log_types::{ComponentPath, EntityPath, RowId, TimeInt, Timeline};
 
 use crate::ui::{
     data_ui::{ComponentUiRegistry, DataUi},
@@ -36,7 +36,7 @@ pub struct ViewerContext<'a> {
 
 impl<'a> ViewerContext<'a> {
     /// Show a [`TableId`] and make it selectable.
-    pub fn table_id_button(&mut self, ui: &mut egui::Ui, table_id: TableId) -> egui::Response {
+    pub fn table_id_button(&mut self, ui: &mut egui::Ui, table_id: RowId) -> egui::Response {
         let item = Item::TableId(table_id);
         let response = ui
             .selectable_label(self.selection().contains(&item), table_id.short_string())

@@ -113,7 +113,7 @@ fn table_row(
     match msg {
         LogMsg::BeginRecordingMsg(msg) => {
             let BeginRecordingMsg {
-                table_id: msg_id,
+                row_id: msg_id,
                 info,
             } = msg;
             let RecordingInfo {
@@ -146,7 +146,7 @@ fn table_row(
         }
         LogMsg::EntityPathOpMsg(msg) => {
             let EntityPathOpMsg {
-                table_id: msg_id,
+                row_id: msg_id,
                 time_point,
                 path_op,
             } = msg;

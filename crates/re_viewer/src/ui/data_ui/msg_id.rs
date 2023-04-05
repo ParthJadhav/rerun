@@ -1,10 +1,10 @@
-use re_log_types::TableId;
+use re_log_types::RowId;
 
 use crate::misc::ViewerContext;
 
 use super::{DataUi, UiVerbosity};
 
-impl DataUi for TableId {
+impl DataUi for RowId {
     fn data_ui(
         &self,
         ctx: &mut ViewerContext<'_>,

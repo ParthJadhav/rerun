@@ -1,6 +1,6 @@
 use itertools::Itertools;
 use re_data_store::{InstancePath, LogDb};
-use re_log_types::{ComponentPath, TableId};
+use re_log_types::{ComponentPath, RowId};
 
 use crate::ui::SpaceViewId;
 
@@ -11,7 +11,7 @@ use crate::ui::SpaceViewId;
 /// A set of these is a an [`ItemCollection`].
 #[derive(Clone, PartialEq, Eq, Hash, serde::Deserialize, serde::Serialize)]
 pub enum Item {
-    TableId(TableId),
+    TableId(RowId),
     ComponentPath(ComponentPath),
     SpaceView(SpaceViewId),
     InstancePath(Option<SpaceViewId>, InstancePath),

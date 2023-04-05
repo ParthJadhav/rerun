@@ -37,10 +37,6 @@ pub mod external {
     pub use image;
 }
 
-// TODO: not transparent
-pub type TableId = re_tuid::Tuid;
-pub type RowId = re_tuid::Tuid;
-
 pub use self::arrow_msg::ArrowMsg;
 pub use self::component::{Component, DeserializableComponent, SerializableComponent};
 pub use self::component_types::context;
@@ -75,6 +71,120 @@ macro_rules! impl_into_enum {
             }
         }
     };
+}
+
+// ----------------------------------------------------------------------------
+
+use arrow2_convert::{ArrowDeserialize, ArrowField, ArrowSerialize};
+
+#[derive(
+    Debug,
+    Clone,
+    Copy,
+    PartialEq,
+    Eq,
+    PartialOrd,
+    Ord,
+    Hash,
+    ArrowField,
+    ArrowSerialize,
+    ArrowDeserialize,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
+#[arrow_field(transparent)]
+pub struct TableId(re_tuid::Tuid);
+
+impl std::fmt::Display for TableId {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        self.0.fmt(f)
+    }
+}
+
+impl TableId {
+    pub const ZERO: Self = Self(re_tuid::Tuid::ZERO);
+
+    #[inline]
+    #[cfg(not(target_arch = "wasm32"))]
+    pub fn random() -> Self {
+        Self(re_tuid::Tuid::random())
+    }
+
+    /// Temporary utility while we transition to batching. See #1619.
+    #[doc(hidden)]
+    pub fn into_row_id(self) -> RowId {
+        RowId(self.0)
+    }
+}
+
+impl std::ops::Deref for TableId {
+    type Target = re_tuid::Tuid;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+impl std::ops::DerefMut for TableId {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.0
+    }
+}
+
+#[derive(
+    Debug,
+    Clone,
+    Copy,
+    PartialEq,
+    Eq,
+    PartialOrd,
+    Ord,
+    Hash,
+    ArrowField,
+    ArrowSerialize,
+    ArrowDeserialize,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
+#[arrow_field(transparent)]
+pub struct RowId(re_tuid::Tuid);
+
+impl std::fmt::Display for RowId {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        self.0.fmt(f)
+    }
+}
+
+impl RowId {
+    pub const ZERO: Self = Self(re_tuid::Tuid::ZERO);
+
+    #[inline]
+    #[cfg(not(target_arch = "wasm32"))]
+    pub fn random() -> Self {
+        Self(re_tuid::Tuid::random())
+    }
+
+    /// Temporary utility while we transition to batching. See #1619.
+    #[doc(hidden)]
+    pub fn into_table_id(self) -> TableId {
+        TableId(self.0)
+    }
+}
+
+impl std::ops::Deref for RowId {
+    type Target = re_tuid::Tuid;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+impl std::ops::DerefMut for RowId {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.0
+    }
 }
 
 // ----------------------------------------------------------------------------
@@ -188,19 +298,19 @@ pub enum LogMsg {
     ArrowMsg(ArrowMsg),
 
     /// Sent when the client shuts down the connection.
-    Goodbye(TableId),
+    Goodbye(RowId),
 }
 
 impl LogMsg {
-    pub fn id(&self) -> TableId {
+    pub fn id(&self) -> RowId {
         match self {
-            Self::BeginRecordingMsg(msg) => msg.table_id,
-            Self::EntityPathOpMsg(msg) => msg.table_id,
-            Self::Goodbye(table_id) => *table_id,
+            Self::BeginRecordingMsg(msg) => msg.row_id,
+            Self::EntityPathOpMsg(msg) => msg.row_id,
+            Self::Goodbye(row_id) => *row_id,
             // TODO(#1619): the following only makes sense because, while we support sending and
             // receiving batches, we don't actually do so yet.
             // We need to stop storing raw `LogMsg`s before we can benefit from our batching.
-            Self::ArrowMsg(msg) => msg.table_id,
+            Self::ArrowMsg(msg) => msg.table_id.into_row_id(),
         }
     }
 }
@@ -215,7 +325,7 @@ impl_into_enum!(ArrowMsg, LogMsg, ArrowMsg);
 #[derive(Clone, Debug, PartialEq, Eq)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub struct BeginRecordingMsg {
-    pub table_id: RowId,
+    pub row_id: RowId,
     pub info: RecordingInfo,
 }
 
@@ -307,7 +417,7 @@ impl std::fmt::Display for RecordingSource {
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub struct EntityPathOpMsg {
     /// A unique id per [`EntityPathOpMsg`].
-    pub table_id: TableId,
+    pub row_id: RowId,
 
     /// Time information (when it was logged, when it was received, …).
     ///

@@ -257,7 +257,6 @@ impl DataCellColumn {
 /// #
 /// # assert_eq!(table_in, table_out);
 /// ```
-// TODO(#1619): introduce RowId & TableId
 #[derive(Debug, Clone, PartialEq)]
 pub struct DataTable {
     /// Auto-generated `TUID`, uniquely identifying this batch of data and keeping track of the

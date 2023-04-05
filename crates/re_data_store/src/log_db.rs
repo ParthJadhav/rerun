@@ -156,15 +156,6 @@ impl EntityDb {
 /// A in-memory database built from a stream of [`LogMsg`]es.
 #[derive(Default)]
 pub struct LogDb {
-    /// Messages in the order they arrived
-    chronological_row_ids: Vec<RowId>,
-    log_messages: ahash::HashMap<RowId, LogMsg>,
-
-    /// Data that was logged with [`TimePoint::timeless`].
-    /// We need to re-insert those in any new timelines
-    /// that are created after they were logged.
-    timeless_row_ids: Vec<RowId>,
-
     /// Set by whomever created this [`LogDb`].
     pub data_source: Option<re_smart_channel::Source>,
 
@@ -201,7 +192,9 @@ impl LogDb {
     }
 
     pub fn is_empty(&self) -> bool {
-        self.log_messages.is_empty()
+        let num_timeless_rows = self.entity_db.data_store.total_timeless_rows();
+        let num_temporal_rows = self.entity_db.data_store.total_temporal_rows();
+        num_timeless_rows + num_temporal_rows == 0
     }
 
     pub fn add(&mut self, msg: LogMsg) -> Result<(), Error> {
@@ -220,12 +213,6 @@ impl LogDb {
             LogMsg::ArrowMsg(inner) => self.entity_db.try_add_arrow_msg(inner)?,
             LogMsg::Goodbye(_) => {}
         }
-
-        // TODO(#1619): the following only makes sense because, while we support sending and
-        // receiving batches, we don't actually do so yet.
-        // We need to stop storing raw `LogMsg`s before we can benefit from our batching.
-        self.chronological_row_ids.push(msg.id());
-        self.log_messages.insert(msg.id(), msg);
 
         Ok(())
     }

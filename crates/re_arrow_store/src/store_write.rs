@@ -613,17 +613,6 @@ impl IndexedBucket {
                 total_rows1 + total_rows2,
                 "expected both buckets to sum up to the length of the original bucket"
             );
-
-            // TODO(cmc): Cannot work without more effort because of the fixed overhead... fixable,
-            // but not today.
-            //
-            // let total_size_bytes1 = self.size_bytes() as i64;
-            // let total_size_bytes2 = bucket2.size_bytes() as i64;
-            // debug_assert_eq!(
-            //     _size_bytes as i64,
-            //     total_size_bytes1 + total_size_bytes2,
-            //     "expected both buckets to sum up to the size in bytes of the original bucket"
-            // );
         }
 
         Some((min2, bucket2))

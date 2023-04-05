@@ -317,7 +317,7 @@ pub struct IndexedTable {
     /// to free up space.
     pub all_components: IntSet<ComponentName>,
 
-    /// The number of rows stored in this table, across all of its buckets, in bytes.
+    /// The number of rows stored in this table, across all of its buckets.
     pub buckets_num_rows: u64,
 
     /// The size of both the control & component data stored in this table, across all of its

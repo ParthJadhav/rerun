@@ -612,6 +612,8 @@ impl DataTable {
         name: &str,
         values: &[C],
     ) -> DataTableResult<(Field, Box<dyn Array>)> {
+        crate::profile_function!();
+
         /// Transforms an array of unit values into a list of unit arrays.
         ///
         /// * Before: `[C, C, C, C, C, ...]`
@@ -651,6 +653,8 @@ impl DataTable {
         values: &[T],
         datatype: Option<DataType>,
     ) -> DataTableResult<(Field, Box<dyn Array>)> {
+        crate::profile_function!();
+
         let data = PrimitiveArray::from_slice(values);
 
         let datatype = datatype.unwrap_or(data.data_type().clone());
@@ -703,6 +707,8 @@ impl DataTable {
         name: &str,
         column: &[Option<DataCell>],
     ) -> DataTableResult<(Field, Box<dyn Array>)> {
+        crate::profile_function!();
+
         /// Create a list-array out of a flattened array of cell values.
         ///
         /// * Before: `[C, C, C, C, C, C, C, ...]`
@@ -860,6 +866,8 @@ impl DataTable {
         name: &str,
         column: &dyn Array,
     ) -> DataTableResult<(Timeline, TimeOptVec)> {
+        crate::profile_function!();
+
         // See also [`Timeline::datatype`]
         let timeline = match column.data_type().to_logical_type() {
             DataType::Int64 => Timeline::new_sequence(name),
@@ -892,6 +900,7 @@ impl DataTable {
         column: &dyn Array,
         compute_cell_sizes: bool,
     ) -> DataTableResult<DataCellColumn> {
+        crate::profile_function!();
         Ok(DataCellColumn(
             column
                 .as_any()

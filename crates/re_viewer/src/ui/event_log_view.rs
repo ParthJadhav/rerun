@@ -112,10 +112,7 @@ fn table_row(
 ) {
     match msg {
         LogMsg::BeginRecordingMsg(msg) => {
-            let BeginRecordingMsg {
-                row_id: row_id,
-                info,
-            } = msg;
+            let BeginRecordingMsg { row_id, info } = msg;
             let RecordingInfo {
                 application_id,
                 recording_id,
@@ -125,7 +122,7 @@ fn table_row(
             } = info;
 
             row.col(|ui| {
-                ctx.table_id_button(ui, *row_id);
+                ctx.row_id_button(ui, *row_id);
             });
             row.col(|ui| {
                 ui.monospace("BeginRecordingMsg");
@@ -146,13 +143,13 @@ fn table_row(
         }
         LogMsg::EntityPathOpMsg(msg) => {
             let EntityPathOpMsg {
-                row_id: row_id,
+                row_id,
                 time_point,
                 path_op,
             } = msg;
 
             row.col(|ui| {
-                ctx.table_id_button(ui, *row_id);
+                ctx.row_id_button(ui, *row_id);
             });
             row.col(|ui| {
                 ui.monospace("EntityPathOpMsg");
@@ -183,7 +180,7 @@ fn table_row(
             Ok(table) => {
                 for datarow in table.as_rows() {
                     row.col(|ui| {
-                        ctx.table_id_button(ui, datarow.row_id());
+                        ctx.row_id_button(ui, datarow.row_id());
                     });
                     row.col(|ui| {
                         ui.monospace("ArrowMsg");
@@ -227,7 +224,7 @@ fn table_row(
         },
         LogMsg::Goodbye(row_id) => {
             row.col(|ui| {
-                ctx.table_id_button(ui, *row_id);
+                ctx.row_id_button(ui, *row_id);
             });
             row.col(|ui| {
                 ui.monospace("Goodbye");

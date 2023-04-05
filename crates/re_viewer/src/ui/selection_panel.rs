@@ -136,7 +136,7 @@ pub fn what_is_selected_ui(
         Item::RowId(row_id) => {
             ui.horizontal(|ui| {
                 ui.label("Message ID:");
-                ctx.table_id_button(ui, *row_id);
+                ctx.row_id_button(ui, *row_id);
             });
         }
         Item::ComponentPath(re_log_types::ComponentPath {

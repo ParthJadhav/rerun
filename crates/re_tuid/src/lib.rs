@@ -98,12 +98,14 @@ impl Tuid {
         self.time_ns
     }
 
-    /// A shortened string representation of the message id.
+    /// A shortened string representation of the `Tuid`.
     #[inline]
     pub fn short_string(&self) -> String {
-        // We still want this to look like a part of the full message id (i.e. what is printed on std::fmt::Display).
+        // We still want this to look like a part of the full TUID (i.e. what is printed on
+        // `std::fmt::Display`).
         // Per Thread randomness plus increment is in the last part, so show only that.
-        // (the first half is time in nanoseconds which for the _most part_ doesn't change that often)
+        // (the first half is time in nanoseconds which for the _most part_ doesn't change that
+        // often)
         let str = self.to_string();
         str[(str.len() - 8)..].to_string()
     }

@@ -245,8 +245,8 @@ impl LogDb {
             .filter_map(|id| self.get_log_msg(id))
     }
 
-    pub fn get_log_msg(&self, table_id: &RowId) -> Option<&LogMsg> {
-        self.log_messages.get(table_id)
+    pub fn get_log_msg(&self, row_id: &RowId) -> Option<&LogMsg> {
+        self.log_messages.get(row_id)
     }
 
     /// Free up some RAM by forgetting the older parts of all timelines.

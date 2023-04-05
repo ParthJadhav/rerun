@@ -6,9 +6,9 @@ use nohash_hasher::IntSet;
 use re_arrow_store::LatestAtQuery;
 use re_data_store::EntityPath;
 use re_log_types::{
-    component_types::{ClassId, InstanceKey, KeypointId},
+    component_types::{ClassId, KeypointId},
     context::{AnnotationInfo, ClassDescription},
-    AnnotationContext, Component, RowId,
+    AnnotationContext, RowId,
 };
 use re_query::query_entity_with_primary;
 
@@ -145,7 +145,7 @@ impl AnnotationMap {
                             data_store,
                             &latest_at_query,
                             &parent,
-                            &[InstanceKey::name()], // TODO: can i pass nothin?
+                            &[],
                         )
                         .ok()
                         .and_then(|entity| {
@@ -188,12 +188,12 @@ impl AnnotationMap {
 
 // ---
 
-const MISSING_MSG_ID: RowId = RowId::ZERO;
+const MISSING_ROW_ID: RowId = RowId::ZERO;
 
 lazy_static! {
     pub static ref MISSING_ANNOTATIONS: Arc<Annotations> = {
         Arc::new(Annotations {
-            row_id: MISSING_MSG_ID,
+            row_id: MISSING_ROW_ID,
             context: Default::default(),
         })
     };

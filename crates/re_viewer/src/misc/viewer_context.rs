@@ -36,14 +36,14 @@ pub struct ViewerContext<'a> {
 
 impl<'a> ViewerContext<'a> {
     /// Show a [`TableId`] and make it selectable.
-    pub fn table_id_button(&mut self, ui: &mut egui::Ui, table_id: RowId) -> egui::Response {
-        let item = Item::RowId(table_id);
+    pub fn row_id_button(&mut self, ui: &mut egui::Ui, row_id: RowId) -> egui::Response {
+        let item = Item::RowId(row_id);
         let response = ui
-            .selectable_label(self.selection().contains(&item), table_id.short_string())
+            .selectable_label(self.selection().contains(&item), row_id.short_string())
             .on_hover_ui(|ui| {
-                ui.label(format!("Message ID: {table_id}"));
+                ui.label(format!("Message ID: {row_id}"));
                 ui.separator();
-                table_id.data_ui(self, ui, UiVerbosity::Small, &self.current_query());
+                row_id.data_ui(self, ui, UiVerbosity::Small, &self.current_query());
             });
         self.cursor_interact_with_selectable(response, item)
     }

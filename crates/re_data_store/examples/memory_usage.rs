@@ -57,7 +57,7 @@ fn main() {
 fn log_messages() {
     use re_log_types::{
         datagen::{build_frame_nr, build_some_point2d},
-        ArrowMsg, LogMsg, TimeInt, TimePoint, Timeline,
+        LogMsg, TimeInt, TimePoint, Timeline,
     };
 
     // Note: we use Box in this function so that we also count the "static"
@@ -116,7 +116,7 @@ fn log_messages() {
             .into_table(),
         );
         let table_bytes = live_bytes() - used_bytes_start;
-        let log_msg = Box::new(LogMsg::ArrowMsg(ArrowMsg::try_from(&*table).unwrap()));
+        let log_msg = Box::new(LogMsg::ArrowMsg(table.as_arrow_msg().unwrap()));
         let log_msg_bytes = live_bytes() - used_bytes_start;
         println!("Arrow payload containing a Pos2 uses {table_bytes} bytes in RAM");
         let encoded = encode_log_msg(&log_msg);
@@ -139,7 +139,7 @@ fn log_messages() {
             .into_table(),
         );
         let table_bytes = live_bytes() - used_bytes_start;
-        let log_msg = Box::new(LogMsg::ArrowMsg(ArrowMsg::try_from(&*table).unwrap()));
+        let log_msg = Box::new(LogMsg::ArrowMsg(table.as_arrow_msg().unwrap()));
         let log_msg_bytes = live_bytes() - used_bytes_start;
         println!("Arrow payload containing a Pos2 uses {table_bytes} bytes in RAM");
         let encoded = encode_log_msg(&log_msg);

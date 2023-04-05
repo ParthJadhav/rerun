@@ -140,10 +140,10 @@ mod tests {
         );
 
         let table_in = row.into_table();
-        let msg_in: ArrowMsg = (&table_in).try_into().unwrap();
+        let msg_in = table_in.as_arrow_msg().unwrap();
         let buf = rmp_serde::to_vec(&msg_in).unwrap();
         let msg_out: ArrowMsg = rmp_serde::from_slice(&buf).unwrap();
-        let table_out: DataTable = (&msg_out).try_into().unwrap();
+        let table_out = DataTable::from_arrow_msg(&msg_out, true).unwrap();
 
         assert_eq!(msg_in, msg_out);
         assert_eq!(table_in, table_out);

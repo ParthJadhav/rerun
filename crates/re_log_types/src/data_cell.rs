@@ -114,6 +114,12 @@ pub struct DataCellInner {
     // TODO(#1696): Store this within the datatype itself.
     pub(crate) name: ComponentName,
 
+    /// The size in bytes of the underlying arrow data.
+    ///
+    /// This is always zero unless [`Self::compute_size_bytes`] has been called, which is a very
+    /// costly operation.
+    pub(crate) values_size_bytes: u64,
+
     /// A uniformly typed list of values for the given component type: `[C, C, C, ...]`
     ///
     /// Includes the data, its schema and probably soon the component metadata
@@ -223,7 +229,11 @@ impl DataCell {
         values: Box<dyn arrow2::array::Array>,
     ) -> DataCellResult<Self> {
         Ok(Self {
-            inner: Arc::new(DataCellInner { name, values }),
+            inner: Arc::new(DataCellInner {
+                name,
+                values_size_bytes: 0,
+                values,
+            }),
         })
     }
 
@@ -256,11 +266,16 @@ impl DataCell {
         datatype: arrow2::datatypes::DataType,
     ) -> DataCellResult<Self> {
         // TODO(cmc): check that it is indeed a component datatype
+
+        let mut inner = DataCellInner {
+            name,
+            values_size_bytes: 0,
+            values: arrow2::array::new_empty_array(datatype),
+        };
+        inner.compute_size_bytes();
+
         Ok(Self {
-            inner: Arc::new(DataCellInner {
-                name,
-                values: arrow2::array::new_empty_array(datatype),
-            }),
+            inner: Arc::new(inner),
         })
     }
 
@@ -426,6 +441,28 @@ impl DataCell {
             _ => Err(DataCellError::UnsupportedDatatype(arr.data_type().clone())),
         }
     }
+
+    /// Returns the total (heap) allocated size of the cell in bytes, provided that
+    /// [`Self::compute_size_bytes`] has been called first.
+    ///
+    /// This is an approximation, accurate enough for most purposes (stats, GC trigger, ...).
+    ///
+    /// This is `O(1)`, the value is computed and cached by calling [`Self::compute_size_bytes`].
+    #[inline]
+    pub fn size_bytes(&self) -> u64 {
+        let Self { inner } = self;
+        let DataCellInner {
+            name,
+            values_size_bytes,
+            values,
+        } = &**inner;
+
+        (std::mem::size_of_val(inner)
+            + std::mem::size_of_val(name)
+            + std::mem::size_of_val(values_size_bytes)
+            + std::mem::size_of_val(values)) as u64
+            + *values_size_bytes
+    }
 }
 
 // ---
@@ -457,6 +494,10 @@ impl<C: SerializableComponent> From<&Vec<C>> for DataCell {
 
 impl std::fmt::Display for DataCell {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_fmt(format_args!(
+            "DataCell({})",
+            re_format::format_bytes(self.size_bytes() as _)
+        ))?;
         re_format::arrow::format_table(
             // NOTE: wrap in a ListArray so that it looks more cell-like (i.e. single row)
             [&*self.as_arrow_monolist()],
@@ -469,15 +510,34 @@ impl std::fmt::Display for DataCell {
 // ---
 
 impl DataCell {
-    /// Returns the total (heap) allocated size of the array in bytes.
+    /// Compute and cache the total (heap) allocated size of the underlying arrow array in bytes.
+    /// This does nothing if the size has already been computed and cached before.
     ///
-    /// Beware: this is costly! Cache the returned value as much as possible.
-    pub fn size_bytes(&self) -> u64 {
-        let DataCellInner { name, values } = &*self.inner;
+    /// The caller must the sole owner of this cell, as this requires mutating an `Arc` under the
+    /// hood. Returns false otherwise.
+    ///
+    /// Beware: this is _very_ costly!
+    #[inline]
+    pub fn compute_size_bytes(&mut self) -> bool {
+        if let Some(inner) = Arc::get_mut(&mut self.inner) {
+            inner.compute_size_bytes();
+            return true;
+        }
+        false
+    }
+}
 
-        std::mem::size_of_val(name) as u64 +
-            // Warning: this is surprisingly costly!
-            arrow2::compute::aggregate::estimated_bytes_size(&**values) as u64
+impl DataCellInner {
+    /// Compute and cache the total (heap) allocated size of the underlying arrow array in bytes.
+    /// This does nothing if the size has already been computed and cached before.
+    ///
+    /// Beware: this is _very_ costly!
+    #[inline]
+    pub fn compute_size_bytes(&mut self) {
+        if self.values_size_bytes == 0 {
+            self.values_size_bytes =
+                arrow2::compute::aggregate::estimated_bytes_size(&*self.values) as u64;
+        }
     }
 }
 

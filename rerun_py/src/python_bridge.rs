@@ -481,8 +481,9 @@ fn log_transform(
         [transform].as_slice(),
     );
 
-    let msg = (&row.into_table())
-        .try_into()
+    let msg = row
+        .into_table()
+        .as_arrow_msg()
         .map_err(|err: DataTableError| PyValueError::new_err(err.to_string()))?;
 
     session.send(LogMsg::ArrowMsg(msg));
@@ -565,8 +566,9 @@ fn log_view_coordinates(
         [coordinates].as_slice(),
     );
 
-    let msg = (&row.into_table())
-        .try_into()
+    let msg = row
+        .into_table()
+        .as_arrow_msg()
         .map_err(|err: DataTableError| PyValueError::new_err(err.to_string()))?;
 
     session.send(LogMsg::ArrowMsg(msg));
@@ -699,8 +701,9 @@ fn log_meshes(
         meshes,
     );
 
-    let msg = (&row.into_table())
-        .try_into()
+    let msg = row
+        .into_table()
+        .as_arrow_msg()
         .map_err(|err: DataTableError| PyValueError::new_err(err.to_string()))?;
 
     session.send(LogMsg::ArrowMsg(msg));
@@ -780,8 +783,9 @@ fn log_mesh_file(
         [mesh3d].as_slice(),
     );
 
-    let msg = (&row.into_table())
-        .try_into()
+    let msg = row
+        .into_table()
+        .as_arrow_msg()
         .map_err(|err: DataTableError| PyValueError::new_err(err.to_string()))?;
 
     session.send(LogMsg::ArrowMsg(msg));
@@ -872,8 +876,9 @@ fn log_image_file(
         [tensor].as_slice(),
     );
 
-    let msg = (&row.into_table())
-        .try_into()
+    let msg = row
+        .into_table()
+        .as_arrow_msg()
         .map_err(|err: DataTableError| PyValueError::new_err(err.to_string()))?;
 
     session.send(LogMsg::ArrowMsg(msg));
@@ -951,8 +956,9 @@ fn log_annotation_context(
         [annotation_context].as_slice(),
     );
 
-    let msg = (&row.into_table())
-        .try_into()
+    let msg = row
+        .into_table()
+        .as_arrow_msg()
         .map_err(|err: DataTableError| PyValueError::new_err(err.to_string()))?;
 
     session.send(LogMsg::ArrowMsg(msg));

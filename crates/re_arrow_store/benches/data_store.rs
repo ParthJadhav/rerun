@@ -259,7 +259,7 @@ fn build_table(n: usize, packed: bool) -> DataTable {
     // Do a serialization roundtrip to pack everything in contiguous memory.
     if packed {
         let (schema, columns) = table.serialize().unwrap();
-        table = DataTable::deserialize(MsgId::ZERO, &schema, &columns).unwrap();
+        table = DataTable::deserialize(MsgId::ZERO, &schema, &columns, false).unwrap();
     }
 
     table

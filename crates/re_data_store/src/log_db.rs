@@ -53,7 +53,8 @@ impl EntityDb {
     }
 
     fn try_add_arrow_msg(&mut self, msg: &ArrowMsg) -> Result<(), Error> {
-        let table: DataTable = msg.try_into()?;
+        // TODO(#1760): Compute the size of the datacells in the batching threads on the clients.
+        let table = DataTable::from_arrow_msg(msg, true)?;
 
         // TODO(#1619): batch all of this
         for row in table.as_rows() {

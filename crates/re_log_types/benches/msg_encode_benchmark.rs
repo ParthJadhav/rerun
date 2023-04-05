@@ -6,7 +6,7 @@ static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
 
 use re_log_types::{
     datagen::{build_frame_nr, build_some_colors, build_some_point2d},
-    entity_path, ArrowMsg, DataRow, DataTable, Index, LogMsg, MsgId,
+    entity_path, DataRow, DataTable, Index, LogMsg, MsgId,
 };
 
 use criterion::{criterion_group, criterion_main, Criterion};
@@ -45,7 +45,7 @@ fn decode_log_msgs(mut bytes: &[u8]) -> Vec<LogMsg> {
 fn generate_messages(tables: &[DataTable]) -> Vec<LogMsg> {
     tables
         .iter()
-        .map(|table| LogMsg::ArrowMsg(ArrowMsg::try_from(table).unwrap()))
+        .map(|table| LogMsg::ArrowMsg(table.as_arrow_msg().unwrap()))
         .collect()
 }
 
@@ -54,7 +54,7 @@ fn decode_tables(messages: &[LogMsg]) -> Vec<DataTable> {
         .iter()
         .map(|log_msg| {
             if let LogMsg::ArrowMsg(arrow_msg) = log_msg {
-                DataTable::try_from(arrow_msg).unwrap()
+                DataTable::from_arrow_msg(arrow_msg, false).unwrap()
             } else {
                 unreachable!()
             }

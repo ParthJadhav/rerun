@@ -101,7 +101,7 @@ impl DataUi for ArrowMsg {
         verbosity: UiVerbosity,
         query: &re_arrow_store::LatestAtQuery,
     ) {
-        let table: DataTable = match self.try_into() {
+        let table = match DataTable::from_arrow_msg(self, false) {
             Ok(table) => table,
             Err(err) => {
                 ui.label(

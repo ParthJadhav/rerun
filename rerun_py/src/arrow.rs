@@ -112,8 +112,9 @@ pub fn build_chunk_from_components(
         cells,
     );
 
-    let msg = (&row.into_table())
-        .try_into()
+    let msg = row
+        .into_table()
+        .as_arrow_msg()
         .map_err(|err: DataTableError| PyValueError::new_err(err.to_string()))?;
 
     Ok(LogMsg::ArrowMsg(msg))

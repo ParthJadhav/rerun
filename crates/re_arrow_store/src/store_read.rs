@@ -655,7 +655,7 @@ impl IndexedBucket {
             col_row_id: _,
             col_num_instances: _,
             columns,
-            total_size_bytes: _, // TODO(#1619)
+            size_bytes: _,
         } = &*self.inner.read();
         debug_assert!(is_sorted);
 
@@ -761,7 +761,7 @@ impl IndexedBucket {
             col_row_id,
             col_num_instances: _,
             columns,
-            total_size_bytes: _, // TODO(#1619)
+            size_bytes: _,
         } = &*self.inner.read();
         debug_assert!(is_sorted);
 
@@ -873,7 +873,7 @@ impl IndexedBucketInner {
             col_row_id,
             col_num_instances,
             columns,
-            total_size_bytes: _,
+            size_bytes: _,
         } = self;
 
         if *is_sorted {

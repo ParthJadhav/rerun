@@ -243,15 +243,17 @@ impl MsgSender {
         let [row_standard, row_transforms, row_splats] = self.into_rows();
 
         if let Some(row_transforms) = row_transforms {
-            sink.send(LogMsg::ArrowMsg((&row_transforms.into_table()).try_into()?));
+            sink.send(LogMsg::ArrowMsg(
+                row_transforms.into_table().as_arrow_msg()?,
+            ));
         }
         if let Some(row_splats) = row_splats {
-            sink.send(LogMsg::ArrowMsg((&row_splats.into_table()).try_into()?));
+            sink.send(LogMsg::ArrowMsg(row_splats.into_table().as_arrow_msg()?));
         }
         // Always the primary component last so range-based queries will include the other data.
         // Since the primary component can't be splatted it must be in msg_standard, see(#1215).
         if let Some(row_standard) = row_standard {
-            sink.send(LogMsg::ArrowMsg((&row_standard.into_table()).try_into()?));
+            sink.send(LogMsg::ArrowMsg(row_standard.into_table().as_arrow_msg()?));
         }
 
         Ok(())

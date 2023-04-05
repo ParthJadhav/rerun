@@ -8,6 +8,18 @@
 
 use arrow2_convert::{ArrowDeserialize, ArrowField, ArrowSerialize};
 
+/// ```
+/// # use re_tuid::Tuid;
+/// # use arrow2_convert::field::ArrowField;
+/// # use arrow2::datatypes::{DataType, Field};
+/// assert_eq!(
+///     Tuid::data_type(),
+///     DataType::Struct(vec![
+///         Field::new("time_ns", DataType::UInt64, false),
+///         Field::new("inc", DataType::UInt64, false),
+///     ])
+/// );
+/// ```
 #[derive(
     Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, ArrowField, ArrowSerialize, ArrowDeserialize,
 )]
@@ -22,6 +34,12 @@ pub struct Tuid {
 }
 
 impl std::fmt::Debug for Tuid {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{:032X}", self.as_u128())
+    }
+}
+
+impl std::fmt::Display for Tuid {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{:032X}", self.as_u128())
     }
@@ -78,6 +96,16 @@ impl Tuid {
     #[inline]
     pub fn nanoseconds_since_epoch(&self) -> u64 {
         self.time_ns
+    }
+
+    /// A shortened string representation of the message id.
+    #[inline]
+    pub fn short_string(&self) -> String {
+        // We still want this to look like a part of the full message id (i.e. what is printed on std::fmt::Display).
+        // Per Thread randomness plus increment is in the last part, so show only that.
+        // (the first half is time in nanoseconds which for the _most part_ doesn't change that often)
+        let str = self.to_string();
+        str[(str.len() - 8)..].to_string()
     }
 }
 

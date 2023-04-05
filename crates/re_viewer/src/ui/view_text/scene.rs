@@ -63,19 +63,17 @@ impl SceneText {
 
             let components = [
                 InstanceKey::name(),
-                MsgId::name(),
                 component_types::TextEntry::name(),
                 component_types::ColorRGBA::name(),
             ];
-            let ent_views = range_entity_with_primary::<component_types::TextEntry, 4>(
+            let ent_views = range_entity_with_primary::<component_types::TextEntry, 3>(
                 store, &query, ent_path, components,
             );
 
             for (time, ent_view) in ent_views {
-                match ent_view.visit3(
+                match ent_view.visit2(
                     |_instance,
                      text_entry: component_types::TextEntry,
-                     msg_id: Option<MsgId>,
                      color: Option<component_types::ColorRGBA>| {
                         let component_types::TextEntry { body, level } = text_entry;
 
@@ -86,7 +84,7 @@ impl SceneText {
 
                         if is_visible {
                             self.text_entries.push(TextEntry {
-                                msg_id: msg_id.unwrap(), // always present
+                                msg_id: ent_view.row_id(),
                                 entity_path: entity_path.clone(),
                                 time: time.map(|time| time.as_i64()),
                                 color: color.map(|c| c.to_array()),

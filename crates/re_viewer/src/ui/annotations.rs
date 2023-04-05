@@ -6,9 +6,9 @@ use nohash_hasher::IntSet;
 use re_arrow_store::LatestAtQuery;
 use re_data_store::EntityPath;
 use re_log_types::{
-    component_types::{ClassId, KeypointId},
+    component_types::{ClassId, InstanceKey, KeypointId},
     context::{AnnotationInfo, ClassDescription},
-    AnnotationContext, Component, MsgId,
+    AnnotationContext, Component, RowId,
 };
 use re_query::query_entity_with_primary;
 
@@ -16,7 +16,7 @@ use crate::{misc::ViewerContext, ui::scene::SceneQuery};
 
 #[derive(Clone, Debug)]
 pub struct Annotations {
-    pub msg_id: MsgId,
+    pub row_id: RowId,
     pub context: AnnotationContext,
 }
 
@@ -145,18 +145,16 @@ impl AnnotationMap {
                             data_store,
                             &latest_at_query,
                             &parent,
-                            &[MsgId::name()],
+                            &[InstanceKey::name()], // TODO: can i pass nothin?
                         )
                         .ok()
                         .and_then(|entity| {
-                            if let (Some(context), Some(msg_id)) = (
-                                entity.iter_primary().ok()?.next()?,
-                                entity.iter_component::<MsgId>().ok()?.next()?,
-                            ) {
-                                Some(entry.insert(Arc::new(Annotations { msg_id, context })))
-                            } else {
-                                None
-                            }
+                            entity.iter_primary().ok()?.next()?.map(|context| {
+                                entry.insert(Arc::new(Annotations {
+                                    row_id: entity.row_id(),
+                                    context,
+                                }))
+                            })
                         })
                         .is_some()
                         {
@@ -190,12 +188,12 @@ impl AnnotationMap {
 
 // ---
 
-const MISSING_MSG_ID: MsgId = MsgId::ZERO;
+const MISSING_MSG_ID: RowId = RowId::ZERO;
 
 lazy_static! {
     pub static ref MISSING_ANNOTATIONS: Arc<Annotations> = {
         Arc::new(Annotations {
-            msg_id: MISSING_MSG_ID,
+            row_id: MISSING_MSG_ID,
             context: Default::default(),
         })
     };

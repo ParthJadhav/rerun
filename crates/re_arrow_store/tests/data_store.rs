@@ -75,18 +75,16 @@ fn all_components() {
         let cluster_key = store.cluster_key();
 
         let components_a = &[
-            ColorRGBA::name(),           // added by us, timeless
-            Rect2D::name(),              // added by us
-            cluster_key,                 // always here
-            re_log_types::MsgId::name(), // injected automatically (..for now)
+            ColorRGBA::name(), // added by us, timeless
+            Rect2D::name(),    // added by us
+            cluster_key,       // always here
         ];
 
         let components_b = &[
-            ColorRGBA::name(),           // added by us, timeless
-            Point2D::name(),             // added by us
-            Rect2D::name(),              // added by us
-            cluster_key,                 // always here
-            re_log_types::MsgId::name(), // injected automatically (..for now)
+            ColorRGBA::name(), // added by us, timeless
+            Point2D::name(),   // added by us
+            Rect2D::name(),    // added by us
+            cluster_key,       // always here
         ];
 
         let row = test_row!(ent_path @ [] => 2; [build_some_colors(2)]);
@@ -136,18 +134,16 @@ fn all_components() {
         // └──────────┴────────┴─────────┴────────┴───────────┴──────────┘
 
         let components_a = &[
-            ColorRGBA::name(),           // added by us, timeless
-            Rect2D::name(),              // added by us
-            cluster_key,                 // always here
-            re_log_types::MsgId::name(), // injected automatically (..for now)
+            ColorRGBA::name(), // added by us, timeless
+            Rect2D::name(),    // added by us
+            cluster_key,       // always here
         ];
 
         let components_b = &[
-            ColorRGBA::name(),           // added by us, timeless
-            Rect2D::name(),              // ⚠ inherited before the buckets got split apart!
-            Point2D::name(),             // added by us
-            cluster_key,                 // always here
-            re_log_types::MsgId::name(), // injected automatically (..for now)
+            ColorRGBA::name(), // added by us, timeless
+            Rect2D::name(),    // ⚠ inherited before the buckets got split apart!
+            Point2D::name(),   // added by us
+            cluster_key,       // always here
         ];
 
         let row = test_row!(ent_path @ [] => 2; [build_some_colors(2)]);
@@ -203,18 +199,16 @@ fn all_components() {
         // └──────────┴────────┴────────┴───────────┴──────────┘
 
         let components_a = &[
-            ColorRGBA::name(),           // added by us, timeless
-            Rect2D::name(),              // added by us
-            cluster_key,                 // always here
-            re_log_types::MsgId::name(), // injected automatically (..for now)
+            ColorRGBA::name(), // added by us, timeless
+            Rect2D::name(),    // added by us
+            cluster_key,       // always here
         ];
 
         let components_b = &[
-            ColorRGBA::name(),           // added by us, timeless
-            Point2D::name(),             // added by us but not contained in the second bucket
-            Rect2D::name(),              // added by use
-            cluster_key,                 // always here
-            re_log_types::MsgId::name(), // injected automatically (..for now)
+            ColorRGBA::name(), // added by us, timeless
+            Point2D::name(),   // added by us but not contained in the second bucket
+            Rect2D::name(),    // added by use
+            cluster_key,       // always here
         ];
 
         let row = test_row!(ent_path @ [] => 2; [build_some_colors(2)]);

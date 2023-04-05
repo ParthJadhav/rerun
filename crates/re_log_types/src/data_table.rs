@@ -196,8 +196,8 @@ impl DataCellColumn {
 ///
 /// ```rust
 /// # use re_log_types::{
-/// #     component_types::{ColorRGBA, Label, Point2D, RowId, TableId},
-/// #     DataRow, DataTable, Timeline, TimePoint,
+/// #     component_types::{ColorRGBA, Label, Point2D},
+/// #     DataRow, DataTable, RowId, TableId, Timeline, TimePoint,
 /// # };
 /// #
 /// # let table_id = TableId::random();

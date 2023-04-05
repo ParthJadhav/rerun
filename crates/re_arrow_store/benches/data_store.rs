@@ -8,8 +8,8 @@ use re_arrow_store::{DataStore, DataStoreConfig, LatestAtQuery, RangeQuery, Time
 use re_log_types::{
     component_types::{InstanceKey, Rect2D},
     datagen::{build_frame_nr, build_some_instances, build_some_rects},
-    Component as _, ComponentName, DataCell, DataRow, DataTable, EntityPath, MsgId, TimeType,
-    Timeline,
+    Component as _, ComponentName, DataCell, DataRow, DataTable, EntityPath, RowId, TableId,
+    TimeType, Timeline,
 };
 
 criterion_group!(benches, insert, latest_at, latest_at_missing, range);
@@ -244,10 +244,10 @@ fn range(c: &mut Criterion) {
 
 fn build_table(n: usize, packed: bool) -> DataTable {
     let mut table = DataTable::from_rows(
-        MsgId::ZERO,
+        TableId::ZERO,
         (0..NUM_ROWS).map(move |frame_idx| {
             DataRow::from_cells2(
-                MsgId::random(),
+                RowId::random(),
                 "rects",
                 [build_frame_nr(frame_idx.into())],
                 n as _,
@@ -259,7 +259,7 @@ fn build_table(n: usize, packed: bool) -> DataTable {
     // Do a serialization roundtrip to pack everything in contiguous memory.
     if packed {
         let (schema, columns) = table.serialize().unwrap();
-        table = DataTable::deserialize(MsgId::ZERO, &schema, &columns, false).unwrap();
+        table = DataTable::deserialize(TableId::ZERO, &schema, &columns, false).unwrap();
     }
 
     table
@@ -286,7 +286,7 @@ fn latest_data_at<const N: usize>(
 
     store
         .latest_at(&timeline_query, &ent_path, primary, secondaries)
-        .unwrap_or_else(|| [(); N].map(|_| None))
+        .map_or_else(|| [(); N].map(|_| None), |(_, cells)| cells)
 }
 
 fn range_data<const N: usize>(

@@ -127,7 +127,7 @@ impl ImageCache {
     ) -> ColoredTensorView<'store, 'cache> {
         let key = ImageCacheKey {
             tensor_id: tensor.id(),
-            annotation_msg_id: annotations.msg_id,
+            annotation_msg_id: annotations.row_id,
         };
         let ci = self.images.entry(key).or_insert_with(|| {
             let debug_name = format!("tensor {:?}", tensor.shape());

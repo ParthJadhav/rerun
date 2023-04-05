@@ -74,9 +74,6 @@ impl EntityDb {
         for cell in row.cells().iter() {
             let component_path =
                 ComponentPath::new(row.entity_path().clone(), cell.component_name());
-            if cell.component_name() == MsgId::name() {
-                continue;
-            }
             let pending_clears = self.tree.add_data_msg(row.timepoint(), &component_path);
 
             for (msg_id, time_point) in pending_clears {

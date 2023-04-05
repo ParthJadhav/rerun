@@ -134,8 +134,8 @@ impl std::ops::IndexMut<usize> for DataCellRow {
 ///
 /// ```rust
 /// # use re_log_types::{
-/// #     component_types::{ColorRGBA, Label, RowId, Point2D},
-/// #     DataRow, Timeline,
+/// #     component_types::{ColorRGBA, Label, Point2D},
+/// #     DataRow, RowId, Timeline,
 /// # };
 /// #
 /// # let row_id = RowId::ZERO;
@@ -226,26 +226,13 @@ impl DataRow {
             }
         }
 
-        let mut this = Self {
+        Ok(Self {
             row_id,
             entity_path,
             timepoint,
             num_instances,
             cells,
-        };
-
-        // TODO(cmc): Since we don't yet support mixing splatted data within instanced rows,
-        // we need to craft an array of `MsgId`s that matches the length of the other components.
-        // TODO(#1619): This goes away once the store supports the new control columns
-        use crate::Component as _;
-        if !components.contains(&RowId::name()) {
-            let num_instances = this.num_instances();
-            this.cells.0.push(DataCell::from_native(
-                vec![row_id; num_instances as _].iter(),
-            ));
-        }
-
-        Ok(this)
+        })
     }
 
     /// Builds a new `DataRow` from an iterable of [`DataCell`]s.

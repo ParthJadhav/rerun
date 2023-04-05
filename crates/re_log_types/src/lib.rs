@@ -28,6 +28,7 @@ mod time_real;
 pub mod external {
     pub use arrow2;
     pub use arrow2_convert;
+    pub use re_tuid;
 
     #[cfg(feature = "glam")]
     pub use glam;
@@ -35,6 +36,10 @@ pub mod external {
     #[cfg(feature = "image")]
     pub use image;
 }
+
+pub type MsgId = re_tuid::Tuid;
+pub type TableId = re_tuid::Tuid;
+pub type RowId = re_tuid::Tuid;
 
 pub use self::arrow_msg::ArrowMsg;
 pub use self::component::{Component, DeserializableComponent, SerializableComponent};
@@ -44,7 +49,6 @@ pub use self::component_types::AnnotationContext;
 pub use self::component_types::Arrow3D;
 pub use self::component_types::ViewCoordinates;
 pub use self::component_types::{EncodedMesh3D, Mesh3D, MeshFormat, MeshId, RawMesh3D};
-pub use self::component_types::{MsgId, RowId, TableId};
 pub use self::data::*;
 pub use self::data_cell::{DataCell, DataCellError, DataCellInner, DataCellResult};
 pub use self::data_row::{DataRow, DataRowError, DataRowResult};

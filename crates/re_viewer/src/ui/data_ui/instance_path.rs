@@ -65,7 +65,7 @@ impl DataUi for InstancePath {
                         Err(err) => {
                             ui.label(ctx.re_ui.error_text(format!("Error: {err}")));
                         }
-                        Ok(component_data) => {
+                        Ok((_, component_data)) => {
                             if self.instance_key.is_splat() {
                                 super::component::EntityComponentWithInstances {
                                     entity_path: self.entity_path.clone(),

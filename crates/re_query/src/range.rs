@@ -93,17 +93,22 @@ pub fn range_entity_with_primary<'a, Primary: Component + 'a, const N: usize>(
         .chain(
             store
                 .range(query, ent_path, components)
-                .map(move |(time, _, mut cells)| {
+                .map(move |(time, row_id, mut cells)| {
                     let instance_keys = cells[cluster_col].take().map(|cell| cell.as_arrow());
                     let is_primary = cells[primary_col].is_some();
                     let cwis = cells
                         .into_iter()
                         .enumerate()
                         .map(|(i, cell)| {
-                            cell.map(|cell| ComponentWithInstances {
-                                name: components[i],
-                                instance_keys: instance_keys.clone(), /* shallow */
-                                values: cell.as_arrow(),
+                            cell.map(|cell| {
+                                (
+                                    row_id,
+                                    ComponentWithInstances {
+                                        name: components[i],
+                                        instance_keys: instance_keys.clone(), /* shallow */
+                                        values: cell.as_arrow(),
+                                    },
+                                )
                             })
                         })
                         .collect::<Vec<_>>();
@@ -121,13 +126,19 @@ pub fn range_entity_with_primary<'a, Primary: Component + 'a, const N: usize>(
 
             // We only yield if the primary component has been updated!
             is_primary.then(|| {
+                // NOTE: safe to unwrap, set just above
+                let (row_id, cwi) = state[primary_col]
+                    .as_ref()
+                    .map(|(row_id, cwi)| (*row_id, cwi.clone() /* shallow */))
+                    .unwrap();
+
                 let ent_view = EntityView {
-                    // safe to unwrap, set just above
-                    primary: state[primary_col].clone().unwrap(), // shallow
+                    row_id,
+                    primary: cwi,
                     components: components
                         .iter()
                         .zip(state.iter().cloned() /* shallow */)
-                        .filter_map(|(component, cwi)| cwi.map(|cwi| (*component, cwi)))
+                        .filter_map(|(component, cwi)| cwi.map(|(_, cwi)| (*component, cwi)))
                         .collect(),
                     phantom: std::marker::PhantomData,
                 };

@@ -151,7 +151,7 @@ impl DataStore {
     ///
     /// ```rust
     /// # use polars_core::{prelude::*, series::Series};
-    /// # use re_log_types::{ComponentName, EntityPath, TimeInt};
+    /// # use re_log_types::{ComponentName, EntityPath, RowId, TimeInt};
     /// # use re_arrow_store::{DataStore, LatestAtQuery, RangeQuery};
     /// #
     /// pub fn latest_component(
@@ -163,9 +163,9 @@ impl DataStore {
     ///     let cluster_key = store.cluster_key();
     ///
     ///     let components = &[cluster_key, primary];
-    ///     let cells = store
-    ///         .latest_at(query, ent_path, primary, components)
-    ///         .unwrap_or([(); 2].map(|_| None));
+    ///     let (_, cells) = store
+    ///         .latest_at(&query, ent_path, primary, components)
+    ///         .unwrap_or((RowId::ZERO, [(); 2].map(|_| None)));
     ///
     ///     let series: Result<Vec<_>, _> = cells
     ///         .iter()
@@ -193,7 +193,7 @@ impl DataStore {
         ent_path: &EntityPath,
         primary: ComponentName,
         components: &[ComponentName; N],
-    ) -> Option<[Option<DataCell>; N]> {
+    ) -> Option<(RowId, [Option<DataCell>; N])> {
         crate::profile_function!();
 
         // TODO(cmc): kind & query_id need to somehow propagate through the span system.
@@ -232,7 +232,7 @@ impl DataStore {
         // return the results immediately.
         if cells
             .as_ref()
-            .map_or(false, |cells| cells.iter().all(Option::is_some))
+            .map_or(false, |(_, cells)| cells.iter().all(Option::is_some))
         {
             return cells;
         }
@@ -260,13 +260,13 @@ impl DataStore {
             (None, Some(cells_timeless)) => return Some(cells_timeless),
             // we have both temporal & timeless cells: let's merge the two when it makes sense
             // and return the end result.
-            (Some(mut cells), Some(cells_timeless)) => {
+            (Some((row_id, mut cells)), Some((_, cells_timeless))) => {
                 for (i, row_idx) in cells_timeless.into_iter().enumerate() {
                     if cells[i].is_none() {
                         cells[i] = row_idx;
                     }
                 }
-                return Some(cells);
+                return Some((row_id, cells));
             }
             // no cells at all.
             (None, None) => {}
@@ -320,7 +320,7 @@ impl DataStore {
     /// ```rust
     /// # use arrow2::array::Array;
     /// # use polars_core::{prelude::*, series::Series};
-    /// # use re_log_types::{ComponentName, DataCell, EntityPath, TimeInt};
+    /// # use re_log_types::{ComponentName, DataCell, EntityPath, RowId, TimeInt};
     /// # use re_arrow_store::{DataStore, LatestAtQuery, RangeQuery};
     /// #
     /// # pub fn dataframe_from_cells<const N: usize>(
@@ -354,9 +354,9 @@ impl DataStore {
     ///     let latest_time = query.range.min.as_i64().saturating_sub(1).into();
     ///     let df_latest = {
     ///         let query = LatestAtQuery::new(query.timeline, latest_time);
-    ///         let cells = store
+    ///         let (_, cells) = store
     ///             .latest_at(&query, ent_path, primary, &components)
-    ///             .unwrap_or([(); 2].map(|_| None));
+    ///             .unwrap_or((RowId::ZERO, [(); 2].map(|_| None)));
     ///         dataframe_from_cells(cells)
     ///     };
     ///
@@ -448,7 +448,7 @@ impl IndexedTable {
         time: TimeInt,
         primary: ComponentName,
         components: &[ComponentName; N],
-    ) -> Option<[Option<DataCell>; N]> {
+    ) -> Option<(RowId, [Option<DataCell>; N])> {
         crate::profile_function!();
 
         // Early-exit if this entire table is unaware of this component.
@@ -643,8 +643,9 @@ impl IndexedBucket {
         time: TimeInt,
         primary: ComponentName,
         components: &[ComponentName; N],
-    ) -> Option<[Option<DataCell>; N]> {
+    ) -> Option<(RowId, [Option<DataCell>; N])> {
         crate::profile_function!();
+
         self.sort_indices_if_needed();
 
         let IndexedBucketInner {
@@ -652,7 +653,7 @@ impl IndexedBucket {
             time_range: _,
             col_time,
             col_insert_id: _,
-            col_row_id: _,
+            col_row_id,
             col_num_instances: _,
             columns,
             size_bytes: _,
@@ -661,8 +662,6 @@ impl IndexedBucket {
 
         // Early-exit if this bucket is unaware of this component.
         let column = columns.get(&primary)?;
-
-        crate::profile_function!();
 
         trace!(
             kind = "latest_at",
@@ -742,7 +741,7 @@ impl IndexedBucket {
             }
         }
 
-        Some(cells)
+        Some((col_row_id[secondary_row_nr as usize], cells))
     }
 
     /// Returns an empty iterator if no data could be found for any reason.
@@ -953,7 +952,7 @@ impl PersistentIndexedTable {
         &self,
         primary: ComponentName,
         components: &[ComponentName; N],
-    ) -> Option<[Option<DataCell>; N]> {
+    ) -> Option<(RowId, [Option<DataCell>; N])> {
         if self.is_empty() {
             return None;
         }
@@ -1027,7 +1026,7 @@ impl PersistentIndexedTable {
             }
         }
 
-        Some(cells)
+        Some((self.col_row_id[secondary_row_nr as usize], cells))
     }
 
     /// Returns an empty iterator if no data could be found for any reason.

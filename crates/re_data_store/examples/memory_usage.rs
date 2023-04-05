@@ -48,7 +48,7 @@ fn live_bytes() -> usize {
 
 // ----------------------------------------------------------------------------
 
-use re_log_types::{entity_path, DataRow, MsgId};
+use re_log_types::{entity_path, DataRow, RowId};
 
 fn main() {
     log_messages();
@@ -107,7 +107,7 @@ fn log_messages() {
         let used_bytes_start = live_bytes();
         let table = Box::new(
             DataRow::from_cells1(
-                MsgId::random(),
+                RowId::random(),
                 entity_path!("points"),
                 [build_frame_nr(0.into())],
                 1,
@@ -130,7 +130,7 @@ fn log_messages() {
         let used_bytes_start = live_bytes();
         let table = Box::new(
             DataRow::from_cells1(
-                MsgId::random(),
+                RowId::random(),
                 entity_path!("points"),
                 [build_frame_nr(0.into())],
                 NUM_POINTS as _,

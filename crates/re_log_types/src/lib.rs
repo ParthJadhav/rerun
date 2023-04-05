@@ -37,7 +37,7 @@ pub mod external {
     pub use image;
 }
 
-pub type MsgId = re_tuid::Tuid;
+// TODO: not transparent
 pub type TableId = re_tuid::Tuid;
 pub type RowId = re_tuid::Tuid;
 
@@ -188,15 +188,15 @@ pub enum LogMsg {
     ArrowMsg(ArrowMsg),
 
     /// Sent when the client shuts down the connection.
-    Goodbye(MsgId),
+    Goodbye(TableId),
 }
 
 impl LogMsg {
-    pub fn id(&self) -> MsgId {
+    pub fn id(&self) -> TableId {
         match self {
-            Self::BeginRecordingMsg(msg) => msg.msg_id,
-            Self::EntityPathOpMsg(msg) => msg.msg_id,
-            Self::Goodbye(msg_id) => *msg_id,
+            Self::BeginRecordingMsg(msg) => msg.table_id,
+            Self::EntityPathOpMsg(msg) => msg.table_id,
+            Self::Goodbye(table_id) => *table_id,
             // TODO(#1619): the following only makes sense because, while we support sending and
             // receiving batches, we don't actually do so yet.
             // We need to stop storing raw `LogMsg`s before we can benefit from our batching.
@@ -215,8 +215,7 @@ impl_into_enum!(ArrowMsg, LogMsg, ArrowMsg);
 #[derive(Clone, Debug, PartialEq, Eq)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub struct BeginRecordingMsg {
-    pub msg_id: MsgId,
-
+    pub table_id: RowId,
     pub info: RecordingInfo,
 }
 
@@ -308,7 +307,7 @@ impl std::fmt::Display for RecordingSource {
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub struct EntityPathOpMsg {
     /// A unique id per [`EntityPathOpMsg`].
-    pub msg_id: MsgId,
+    pub table_id: TableId,
 
     /// Time information (when it was logged, when it was received, …).
     ///

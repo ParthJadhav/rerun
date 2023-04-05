@@ -289,10 +289,10 @@ impl<R: std::io::Read> Iterator for Decoder<R> {
 #[cfg(all(feature = "load", feature = "save"))]
 #[test]
 fn test_encode_decode() {
-    use crate::{BeginRecordingMsg, LogMsg, MsgId, Time};
+    use crate::{BeginRecordingMsg, LogMsg, RowId, Time};
 
     let messages = vec![LogMsg::BeginRecordingMsg(BeginRecordingMsg {
-        msg_id: MsgId::random(),
+        table_id: RowId::random(),
         info: crate::RecordingInfo {
             application_id: crate::ApplicationId("test".to_owned()),
             recording_id: crate::RecordingId::random(),

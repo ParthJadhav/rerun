@@ -10,7 +10,7 @@ use pyo3::{
     PyAny, PyResult,
 };
 use re_log_types::{
-    component_types, DataCell, DataRow, DataTableError, EntityPath, LogMsg, MsgId, TimePoint,
+    component_types, DataCell, DataRow, DataTableError, EntityPath, LogMsg, RowId, TimePoint,
 };
 
 /// Perform conversion between a pyarrow array to arrow2 types.
@@ -105,7 +105,7 @@ pub fn build_chunk_from_components(
 
     let num_instances = cells.first().map_or(0, |cell| cell.num_instances());
     let row = DataRow::from_cells(
-        MsgId::random(),
+        RowId::random(),
         time_point.clone(),
         entity_path.clone(),
         num_instances,

@@ -157,7 +157,6 @@ pub fn __populate_example_store() -> DataStore {
     use re_log_types::{
         component_types::{ColorRGBA, Point2D},
         datagen::build_frame_nr,
-        MsgId,
     };
 
     let mut store = DataStore::new(InstanceKey::name(), Default::default());
@@ -169,7 +168,7 @@ pub fn __populate_example_store() -> DataStore {
     let points = vec![Point2D { x: 1.0, y: 2.0 }, Point2D { x: 3.0, y: 4.0 }];
 
     let row = DataRow::from_cells2(
-        MsgId::ZERO,
+        RowId::ZERO,
         ent_path,
         timepoint,
         instances.len() as _,
@@ -181,7 +180,7 @@ pub fn __populate_example_store() -> DataStore {
     let colors = vec![ColorRGBA(0xff000000)];
 
     let row = DataRow::from_cells2(
-        MsgId::ZERO,
+        RowId::ZERO,
         ent_path,
         timepoint,
         instances.len() as _,

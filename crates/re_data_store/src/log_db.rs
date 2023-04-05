@@ -3,8 +3,8 @@ use nohash_hasher::IntMap;
 use re_arrow_store::{DataStoreConfig, TimeInt};
 use re_log_types::{
     component_types::InstanceKey, ArrowMsg, BeginRecordingMsg, Component as _, ComponentPath,
-    DataCell, DataRow, DataTable, EntityPath, EntityPathHash, EntityPathOpMsg, LogMsg, MsgId,
-    PathOp, RecordingId, RecordingInfo, TimePoint, Timeline,
+    DataCell, DataRow, DataTable, EntityPath, EntityPathHash, EntityPathOpMsg, LogMsg, PathOp,
+    RecordingId, RecordingInfo, TableId, TimePoint, Timeline,
 };
 
 use crate::{Error, TimesPerTimeline};
@@ -99,8 +99,8 @@ impl EntityDb {
         self.data_store.insert_row(row).map_err(Into::into)
     }
 
-    fn add_path_op(&mut self, msg_id: MsgId, time_point: &TimePoint, path_op: &PathOp) {
-        let cleared_paths = self.tree.add_path_op(msg_id, time_point, path_op);
+    fn add_path_op(&mut self, table_id: TableId, time_point: &TimePoint, path_op: &PathOp) {
+        let cleared_paths = self.tree.add_path_op(table_id, time_point, path_op);
 
         for component_path in cleared_paths {
             if let Some(data_type) = self
@@ -112,7 +112,7 @@ impl EntityDb {
                 let cell =
                     DataCell::from_arrow_empty(component_path.component_name, data_type.clone());
                 let row = DataRow::from_cells1(
-                    msg_id,
+                    table_id,
                     component_path.entity_path.clone(),
                     time_point.clone(),
                     cell.num_instances(),
@@ -128,7 +128,7 @@ impl EntityDb {
     pub fn purge(
         &mut self,
         cutoff_times: &std::collections::BTreeMap<Timeline, TimeInt>,
-        drop_msg_ids: &ahash::HashSet<MsgId>,
+        drop_table_ids: &ahash::HashSet<TableId>,
     ) {
         crate::profile_function!();
 
@@ -146,7 +146,7 @@ impl EntityDb {
 
         {
             crate::profile_scope!("tree");
-            tree.purge(cutoff_times, drop_msg_ids);
+            tree.purge(cutoff_times, drop_table_ids);
         }
     }
 }
@@ -157,13 +157,13 @@ impl EntityDb {
 #[derive(Default)]
 pub struct LogDb {
     /// Messages in the order they arrived
-    chronological_message_ids: Vec<MsgId>,
-    log_messages: ahash::HashMap<MsgId, LogMsg>,
+    chronological_table_ids: Vec<TableId>,
+    log_messages: ahash::HashMap<TableId, LogMsg>,
 
     /// Data that was logged with [`TimePoint::timeless`].
     /// We need to re-insert those in any new timelines
     /// that are created after they were logged.
-    timeless_message_ids: Vec<MsgId>,
+    timeless_message_ids: Vec<TableId>,
 
     /// Set by whomever created this [`LogDb`].
     pub data_source: Option<re_smart_channel::Source>,
@@ -211,7 +211,7 @@ impl LogDb {
             LogMsg::BeginRecordingMsg(msg) => self.add_begin_recording_msg(msg),
             LogMsg::EntityPathOpMsg(msg) => {
                 let EntityPathOpMsg {
-                    msg_id,
+                    table_id: msg_id,
                     time_point,
                     path_op,
                 } = msg;
@@ -224,7 +224,7 @@ impl LogDb {
         // TODO(#1619): the following only makes sense because, while we support sending and
         // receiving batches, we don't actually do so yet.
         // We need to stop storing raw `LogMsg`s before we can benefit from our batching.
-        self.chronological_message_ids.push(msg.id());
+        self.chronological_table_ids.push(msg.id());
         self.log_messages.insert(msg.id(), msg);
 
         Ok(())
@@ -240,13 +240,13 @@ impl LogDb {
 
     /// In the order they arrived
     pub fn chronological_log_messages(&self) -> impl Iterator<Item = &LogMsg> {
-        self.chronological_message_ids
+        self.chronological_table_ids
             .iter()
             .filter_map(|id| self.get_log_msg(id))
     }
 
-    pub fn get_log_msg(&self, msg_id: &MsgId) -> Option<&LogMsg> {
-        self.log_messages.get(msg_id)
+    pub fn get_log_msg(&self, table_id: &TableId) -> Option<&LogMsg> {
+        self.log_messages.get(table_id)
     }
 
     /// Free up some RAM by forgetting the older parts of all timelines.
@@ -260,7 +260,7 @@ impl LogDb {
         let cutoff_times = self.entity_db.data_store.oldest_time_per_timeline();
 
         let Self {
-            chronological_message_ids,
+            chronological_table_ids: chronological_message_ids,
             log_messages,
             timeless_message_ids,
             data_source: _,

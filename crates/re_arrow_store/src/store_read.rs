@@ -4,7 +4,7 @@ use itertools::Itertools;
 use nohash_hasher::IntSet;
 use re_log::trace;
 use re_log_types::{
-    ComponentName, DataCell, EntityPath, MsgId, RowId, TimeInt, TimePoint, TimeRange, Timeline,
+    ComponentName, DataCell, EntityPath, RowId, TimeInt, TimePoint, TimeRange, Timeline,
 };
 use smallvec::SmallVec;
 
@@ -425,7 +425,7 @@ impl DataStore {
         }
     }
 
-    pub fn get_msg_metadata(&self, msg_id: &MsgId) -> Option<&TimePoint> {
+    pub fn get_msg_metadata(&self, msg_id: &RowId) -> Option<&TimePoint> {
         crate::profile_function!();
 
         self.metadata_registry.get(msg_id)

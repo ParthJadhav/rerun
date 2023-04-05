@@ -13,7 +13,7 @@ use pyo3::{
 
 use re_log_types::{DataRow, DataTableError};
 use rerun::{
-    log::{LogMsg, MsgId, PathOp},
+    log::{LogMsg, PathOp, RowId},
     time::{Time, TimeInt, TimePoint, TimeType, Timeline},
     ApplicationId, EntityPath, RecordingId,
 };
@@ -474,7 +474,7 @@ fn log_transform(
     // introducing new numerical issues.
 
     let row = DataRow::from_cells1(
-        MsgId::random(),
+        RowId::random(),
         entity_path,
         time_point,
         1,
@@ -559,7 +559,7 @@ fn log_view_coordinates(
     // conversion errors.
 
     let row = DataRow::from_cells1(
-        MsgId::random(),
+        RowId::random(),
         entity_path,
         time_point,
         1,
@@ -694,7 +694,7 @@ fn log_meshes(
     // TODO(jleibs) replace with python-native implementation
 
     let row = DataRow::from_cells1(
-        MsgId::random(),
+        RowId::random(),
         entity_path,
         time_point,
         meshes.len() as _,
@@ -776,7 +776,7 @@ fn log_mesh_file(
     // TODO(jleibs) replace with python-native implementation
 
     let row = DataRow::from_cells1(
-        MsgId::random(),
+        RowId::random(),
         entity_path,
         time_point,
         1,
@@ -869,7 +869,7 @@ fn log_image_file(
     };
 
     let row = DataRow::from_cells1(
-        MsgId::random(),
+        RowId::random(),
         entity_path,
         time_point,
         1,
@@ -949,7 +949,7 @@ fn log_annotation_context(
     // TODO(jleibs) replace with python-native implementation
 
     let row = DataRow::from_cells1(
-        MsgId::random(),
+        RowId::random(),
         entity_path,
         time_point,
         1,

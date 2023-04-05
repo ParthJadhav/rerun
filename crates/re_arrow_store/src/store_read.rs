@@ -425,10 +425,10 @@ impl DataStore {
         }
     }
 
-    pub fn get_msg_metadata(&self, msg_id: &RowId) -> Option<&TimePoint> {
+    pub fn get_msg_metadata(&self, row_id: &RowId) -> Option<&TimePoint> {
         crate::profile_function!();
 
-        self.metadata_registry.get(msg_id)
+        self.metadata_registry.get(row_id)
     }
 
     /// Sort all unsorted indices in the store.

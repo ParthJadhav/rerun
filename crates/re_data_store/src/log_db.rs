@@ -76,14 +76,14 @@ impl EntityDb {
                 ComponentPath::new(row.entity_path().clone(), cell.component_name());
             let pending_clears = self.tree.add_data_msg(row.timepoint(), &component_path);
 
-            for (msg_id, time_point) in pending_clears {
+            for (row_id, time_point) in pending_clears {
                 // Create and insert an empty component into the arrow store
                 // TODO(jleibs): Faster empty-array creation
                 let cell =
                     DataCell::from_arrow_empty(cell.component_name(), cell.datatype().clone());
 
                 let row = DataRow::from_cells1(
-                    msg_id,
+                    row_id,
                     row.entity_path.clone(),
                     time_point.clone(),
                     cell.num_instances(),
@@ -128,7 +128,7 @@ impl EntityDb {
     pub fn purge(
         &mut self,
         cutoff_times: &std::collections::BTreeMap<Timeline, TimeInt>,
-        drop_table_ids: &ahash::HashSet<RowId>,
+        drop_row_ids: &ahash::HashSet<RowId>,
     ) {
         crate::profile_function!();
 
@@ -146,7 +146,7 @@ impl EntityDb {
 
         {
             crate::profile_scope!("tree");
-            tree.purge(cutoff_times, drop_table_ids);
+            tree.purge(cutoff_times, drop_row_ids);
         }
     }
 }
@@ -211,11 +211,11 @@ impl LogDb {
             LogMsg::BeginRecordingMsg(msg) => self.add_begin_recording_msg(msg),
             LogMsg::EntityPathOpMsg(msg) => {
                 let EntityPathOpMsg {
-                    row_id: msg_id,
+                    row_id,
                     time_point,
                     path_op,
                 } = msg;
-                self.entity_db.add_path_op(*msg_id, time_point, path_op);
+                self.entity_db.add_path_op(*row_id, time_point, path_op);
             }
             LogMsg::ArrowMsg(inner) => self.entity_db.try_add_arrow_msg(inner)?,
             LogMsg::Goodbye(_) => {}
@@ -255,7 +255,7 @@ impl LogDb {
         assert!((0.0..=1.0).contains(&fraction_to_purge));
 
         // TODO(#1619): bring back garbage collection
-        let drop_msg_ids: ahash::HashSet<_> = Default::default();
+        let drop_row_ids: ahash::HashSet<_> = Default::default();
 
         let cutoff_times = self.entity_db.data_store.oldest_time_per_timeline();
 
@@ -270,18 +270,18 @@ impl LogDb {
 
         {
             crate::profile_scope!("chronological_message_ids");
-            chronological_message_ids.retain(|msg_id| !drop_msg_ids.contains(msg_id));
+            chronological_message_ids.retain(|row_id| !drop_row_ids.contains(row_id));
         }
 
         {
             crate::profile_scope!("log_messages");
-            log_messages.retain(|msg_id, _| !drop_msg_ids.contains(msg_id));
+            log_messages.retain(|row_id, _| !drop_row_ids.contains(row_id));
         }
         {
             crate::profile_scope!("timeless_message_ids");
-            timeless_message_ids.retain(|msg_id| !drop_msg_ids.contains(msg_id));
+            timeless_message_ids.retain(|row_id| !drop_row_ids.contains(row_id));
         }
 
-        entity_db.purge(&cutoff_times, &drop_msg_ids);
+        entity_db.purge(&cutoff_times, &drop_row_ids);
     }
 }

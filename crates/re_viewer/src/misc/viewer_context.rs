@@ -37,7 +37,7 @@ pub struct ViewerContext<'a> {
 impl<'a> ViewerContext<'a> {
     /// Show a [`TableId`] and make it selectable.
     pub fn table_id_button(&mut self, ui: &mut egui::Ui, table_id: RowId) -> egui::Response {
-        let item = Item::TableId(table_id);
+        let item = Item::RowId(table_id);
         let response = ui
             .selectable_label(self.selection().contains(&item), table_id.short_string())
             .on_hover_ui(|ui| {

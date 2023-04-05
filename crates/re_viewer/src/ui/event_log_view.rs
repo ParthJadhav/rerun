@@ -49,7 +49,7 @@ pub(crate) fn message_table(ctx: &mut ViewerContext<'_>, ui: &mut egui::Ui, mess
         .max_scroll_height(f32::INFINITY) // Fill up whole height
         .cell_layout(egui::Layout::left_to_right(egui::Align::Center))
         .resizable(true)
-        .column(Column::initial(100.0).at_least(50.0).clip(true)) // msg_id
+        .column(Column::initial(100.0).at_least(50.0).clip(true)) // row_id
         .column(Column::initial(130.0).at_least(50.0).clip(true)) // message type
         .columns(
             // timeline(s):
@@ -113,7 +113,7 @@ fn table_row(
     match msg {
         LogMsg::BeginRecordingMsg(msg) => {
             let BeginRecordingMsg {
-                row_id: msg_id,
+                row_id: row_id,
                 info,
             } = msg;
             let RecordingInfo {
@@ -125,7 +125,7 @@ fn table_row(
             } = info;
 
             row.col(|ui| {
-                ctx.table_id_button(ui, *msg_id);
+                ctx.table_id_button(ui, *row_id);
             });
             row.col(|ui| {
                 ui.monospace("BeginRecordingMsg");
@@ -146,13 +146,13 @@ fn table_row(
         }
         LogMsg::EntityPathOpMsg(msg) => {
             let EntityPathOpMsg {
-                row_id: msg_id,
+                row_id: row_id,
                 time_point,
                 path_op,
             } = msg;
 
             row.col(|ui| {
-                ctx.table_id_button(ui, *msg_id);
+                ctx.table_id_button(ui, *row_id);
             });
             row.col(|ui| {
                 ui.monospace("EntityPathOpMsg");
@@ -225,9 +225,9 @@ fn table_row(
                 });
             }
         },
-        LogMsg::Goodbye(msg_id) => {
+        LogMsg::Goodbye(row_id) => {
             row.col(|ui| {
-                ctx.table_id_button(ui, *msg_id);
+                ctx.table_id_button(ui, *row_id);
             });
             row.col(|ui| {
                 ui.monospace("Goodbye");

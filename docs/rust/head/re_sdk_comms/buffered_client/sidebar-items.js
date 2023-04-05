@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["InterruptMsg","Sent to prematurely quit (before flushing)."],["MsgMsg",""],["PacketMsg",""]],"fn":[["msg_drop",""],["msg_encode",""],["send_until_success",""],["tcp_sender",""]],"struct":[["Client","Send [`LogMsg`]es to a server over TCP."],["FlushedMsg",""],["QuitMsg","Sent to prematurely quit (before flushing)."]]};

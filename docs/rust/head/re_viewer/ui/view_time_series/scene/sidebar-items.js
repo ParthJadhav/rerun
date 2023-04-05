@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["PlotSeriesKind",""]],"struct":[["PlotPoint",""],["PlotPointAttrs",""],["PlotSeries",""],["SceneTimeSeries","A scene for a time series plot, with everything needed to render it."]]};

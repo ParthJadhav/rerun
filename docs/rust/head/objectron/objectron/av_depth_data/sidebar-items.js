@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["Accuracy","Indicates the general accuracy of the depth_data_map."],["Quality","Quality of the depth_data_map."]]};

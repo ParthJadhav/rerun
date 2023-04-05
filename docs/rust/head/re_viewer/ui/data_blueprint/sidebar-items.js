@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["path_to_group_name",""]],"struct":[["DataBlueprintGroup","A grouping of several data-blueprints."],["DataBlueprintGroupHandle",""],["DataBlueprintTree","Tree of all data blueprint groups for a single space view."],["DataBlueprints","Data blueprints for all entity paths in a space view."]]};

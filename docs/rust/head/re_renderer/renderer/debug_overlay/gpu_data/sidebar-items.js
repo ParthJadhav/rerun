@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["DebugOverlayMode","Modes configuring what the debug overlay shader shows."]],"struct":[["DebugOverlayUniformBuffer","Keep in sync with `debug_overlay.wgsl`"]]};

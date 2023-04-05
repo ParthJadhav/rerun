@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["build","Build `re_viewer` as Wasm, generate .js bindings for it, and place it all into the `./web_viewer` folder."],["target_directory",""]]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["TensorDecodeError",""]],"struct":[["DecodeCache","A cache of decoded [`Tensor`] entities, indexed by `TensorId`."],["DecodedTensor",""]]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":[["IS_ALPHA_BIT",""],["IS_PRERELEASE_BIT",""],["MAX_NUM","We disallow version numbers larger than this in order to keep a few bits for future use."]],"struct":[["CrateVersion","The version of a Rerun crate."]]};

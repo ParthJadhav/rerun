@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["DepthCloudInfoUBO","Keep in sync with mirror in `depth_cloud.wgsl.`"]]};

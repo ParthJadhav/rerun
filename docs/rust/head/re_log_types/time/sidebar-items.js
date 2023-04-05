@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["Duration","A signed duration represented as nanoseconds since unix epoch"],["Time","A date-time represented as nanoseconds since unix epoch"]]};

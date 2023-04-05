@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["Box3D","A 3D bounding box represented by it’s half-lengths"]]};

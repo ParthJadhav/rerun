@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["RerunBehavior",""]],"struct":[["RerunArgs","This struct implements a `clap::Parser` that defines all the arguments that a typical Rerun application might use, and provides helpers to evaluate those arguments and behave consequently."]]};

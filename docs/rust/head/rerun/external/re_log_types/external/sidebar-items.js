@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["arrow2","Welcome to arrow2’s documentation. Thanks for checking it out!"],["arrow2_convert","arrow2_convert"],["glam","glam"],["image","Overview"]]};

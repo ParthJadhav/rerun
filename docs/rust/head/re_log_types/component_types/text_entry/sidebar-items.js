@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["MutableTextEntryArray",""],["TextEntry","A text entry component, comprised of a text body and its log level."],["TextEntryArray",""],["TextEntryArrayIterator",""]]};

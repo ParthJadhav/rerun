@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["global_session","Access a global [`Session`] singleton for convenient logging."]]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":[["DEFAULT_WS_SERVER_PORT",""],["PREFIX",""],["PROTOCOL",""]],"fn":[["decode_log_msg",""],["default_server_url",""],["encode_log_msg",""]],"mod":[["client",""],["server","The server is a pub-sub architecture."]],"struct":[["Connection","Represents a connection to the server. Disconnects on drop."],["Server",""]],"type":[["Result",""]]};

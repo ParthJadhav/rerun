@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["Command","All the commands we support."]],"struct":[["CommandIter","An iterator over the variants of [Self]"]]};

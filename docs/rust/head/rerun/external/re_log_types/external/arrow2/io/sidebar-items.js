@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["ipc","APIs to read from and write to Arrow’s IPC format."],["print","APIs to represent [`Chunk`] as a formatted table."]]};

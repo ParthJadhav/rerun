@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":[["MAX_SELECTION_HISTORY_LENGTH",""]],"struct":[["HistoricalSelection","A `Selection` and its index into the historical stack."],["SelectionHistory","A stack of `Selection`s, used to implement “undo/redo”-like semantics for selections."]]};

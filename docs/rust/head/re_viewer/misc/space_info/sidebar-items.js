@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["query_view_coordinates",""]],"struct":[["SpaceInfo","Information about one “space”."],["SpaceInfoCollection","Information about all spaces."]]};

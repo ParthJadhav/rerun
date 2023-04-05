@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["Quaternion","A Quaternion represented by 4 real numbers."]]};

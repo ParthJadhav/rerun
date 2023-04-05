@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["InstanceData","Element in the gpu residing instance buffer."]]};

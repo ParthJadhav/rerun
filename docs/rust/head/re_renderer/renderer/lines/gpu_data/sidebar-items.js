@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["BatchUniformBuffer","Uniform buffer that changes for every batch of line strips."],["DrawDataUniformBuffer","Uniform buffer that changes once per draw data rendering."],["LineStripInfo",""],["LineVertex",""]]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["Axis3","One of `X`, `Y`, `Z`."],["Handedness","Left or right handedness. Used to describe a coordinate system."],["Sign","Positive (`+`) or Negative (`-`)."]],"struct":[["SignedAxis3","One of: `+X`, `-X`, `+Y`, `-Y`, `+Z`, `-Z`, i.e. one of the six cardinal direction in 3D space."]]};

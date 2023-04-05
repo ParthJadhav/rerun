@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["next_free_shader_location","Next vertex attribute index that can be used for another vertex buffer."],["vertex_buffer_layouts","Vertex buffer layouts describing how vertex data should be laid out."]]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["do_not_call_into_iter",""]],"struct":[["BinaryBuffer","Shim to enable zero-copy arrow deserialization for `Buffer<u8>` Can be removed when: arrow2-convert#103 lands"],["BufferBinaryArray","Internal `ArrowArray` helper to iterate over a `BinaryArray` while exposing Buffer slices"],["BufferBinaryArrayIter","Iterator for for [`BufferBinaryArray`]"]]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["Alignment",""],["PlaneClassification",""],["PlaneClassificationStatus","The classification status for the plane."]],"struct":[["PlaneVector","Wrapper for a 3D point / vector within the plane. See extent and center values for more information."]]};

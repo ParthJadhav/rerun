@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["monotonic_nanos_since_epoch","Returns a high-precision, monotonically increasing count that approximates nanoseconds since unix epoch."],["random_u64",""]],"struct":[["MutableTuidArray",""],["Tuid",""],["TuidArray",""],["TuidArrayIterator",""]]};

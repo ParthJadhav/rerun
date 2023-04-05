@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["ViewCategory",""]],"fn":[["categorize_entity_path",""]],"type":[["ViewCategorySet",""]]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":[["MISSING_MSG_ID",""]],"enum":[["DefaultColor",""]],"fn":[["auto_color",""]],"struct":[["AnnotationMap",""],["Annotations",""],["MISSING_ANNOTATIONS",""],["ResolvedAnnotationInfo",""],["ResolvedClassDescription",""]]};

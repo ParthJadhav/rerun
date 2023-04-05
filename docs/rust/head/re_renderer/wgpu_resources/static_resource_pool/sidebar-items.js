@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["StaticResourcePool","Generic resource pool for all resources that are fully described upon creation, i.e. never have any variable content."],["StoredResource",""]]};

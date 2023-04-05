@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["GpuTexture2DHandle","Handle to a 2D resource."],["Texture2DCreationDesc","Data required to create a texture 2d resource."],["TextureManager2D","Texture manager for 2D textures."]]};

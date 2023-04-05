@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["array_to_rust","Perform conversion between a pyarrow array to arrow2 types."],["build_chunk_from_components","Build a [`LogMsg`] and vector of [`Field`] given a ‘**kwargs’-style dictionary of component arrays."],["get_registered_component_names",""]]};

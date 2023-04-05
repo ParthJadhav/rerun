@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"macro":[["build_info","Create a [`BuildInfo`] at compile-time using environment variables exported by calling `re_build_build_info::export_env_vars()` from your build.rs."]],"mod":[["build_info",""],["crate_version",""]],"struct":[["BuildInfo","Information about the build of a Rust crate."],["CrateVersion","The version of a Rerun crate."]]};

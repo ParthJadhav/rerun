@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["ColorMap",""],["ColorMapper",""]],"fn":[["query_latest_single","Get the latest value for a given [`re_log_types::Component`]."]],"struct":[["EntityProperties",""],["EntityPropertyMap","Properties for a collection of entities."],["ExtraQueryHistory","When showing an entity in the history view, add this much history to it."]]};

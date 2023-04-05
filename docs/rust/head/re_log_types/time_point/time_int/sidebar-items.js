@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["TimeInt","A 64-bit number describing either nanoseconds OR sequence numbers."]]};

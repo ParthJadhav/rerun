@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["df_builder1",""],["df_builder2",""],["df_builder3",""],["fix_polars_nulls","Make it so that our arrays can be deserialized again by arrow2-convert"],["iter_column","Iterator for a single column in a dataframe as the rust-native Component type"]]};

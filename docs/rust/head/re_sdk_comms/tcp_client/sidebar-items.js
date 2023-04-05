@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["TcpStreamState","State of the [`TcpStream`]"]],"struct":[["TcpClient","Connect to a rerun server and send log messages."]]};

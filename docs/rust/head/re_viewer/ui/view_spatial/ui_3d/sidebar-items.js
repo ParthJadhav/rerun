@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":[["HELP_TEXT_3D",""]],"fn":[["add_picking_ray",""],["default_eye",""],["find_camera",""],["show_projections_from_2d_space",""],["view_3d","TODO(andreas): Split into smaller parts, more re-use with `ui_2d`"]],"struct":[["EyeInterpolation",""],["SpaceSpecs",""],["View3DState",""]]};

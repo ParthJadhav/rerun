@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["RemoteViewerApp","Connects to a server over WebSockets."]]};

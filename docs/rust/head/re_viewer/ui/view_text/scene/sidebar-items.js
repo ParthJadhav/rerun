@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["SceneText","A text scene, with everything needed to render it."],["TextEntry",""]]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["UnreachableTransform",""]],"fn":[["inverse_transform_at",""],["transform_at",""]],"struct":[["TransformCache","Provides transforms from an entity to a chosen reference space for all elements in the scene for the currently selected time & timeline."]]};

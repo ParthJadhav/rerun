@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["Item","One “thing” in the UI."]],"struct":[["ItemCollection","An ordered collection of [`Item`]."]]};

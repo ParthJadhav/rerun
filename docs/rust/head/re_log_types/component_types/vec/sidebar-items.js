@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":[["DISPLAY_PRECISION","Number of decimals shown for all vector display methods."]],"struct":[["Vec2D","A vector in 2D space."],["Vec3D","A vector in 3D space."],["Vec4D","A vector in 4D space."]]};

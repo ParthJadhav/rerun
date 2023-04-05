@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["LineStrip2D","A Line Strip of 2D points"],["LineStrip3D","A Line Strip of 3D points"]]};

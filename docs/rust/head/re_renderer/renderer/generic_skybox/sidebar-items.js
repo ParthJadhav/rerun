@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["GenericSkybox","Renders a generated skybox from a color gradient"],["GenericSkyboxDrawData",""]]};

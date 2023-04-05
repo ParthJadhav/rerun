@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["component_as_series",""],["find_component_datatype",""],["insert_ids_as_series",""],["new_infallible_series",""],["sort_df_columns","Sorts the columns of the given dataframe according to the following rules:"]]};

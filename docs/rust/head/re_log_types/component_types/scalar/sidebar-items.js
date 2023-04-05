@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["MutableScalarPlotPropsArray",""],["Scalar","A double-precision scalar."],["ScalarPlotProps","Additional properties of a scalar when rendered as a plot."],["ScalarPlotPropsArray",""],["ScalarPlotPropsArrayIterator",""]]};

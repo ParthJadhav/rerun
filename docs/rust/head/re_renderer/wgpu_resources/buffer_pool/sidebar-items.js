@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["BufferDesc","Buffer creation descriptor."],["GpuBufferHandle",""],["GpuBufferPool",""]],"type":[["GpuBuffer","A reference-counter baked buffer. Once all instances are dropped, the buffer will be marked for reclamation in the following frame."]]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["project_onto","e.g. up is `[0,0,1]`, we return things like `[x,y,0]`"]],"struct":[["Eye","An eye in a 3D view."],["OrbitEye","Note: we use “eye” so we don’t confuse this with logged camera."]]};

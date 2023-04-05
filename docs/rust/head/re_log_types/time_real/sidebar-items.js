@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["TimeReal","Either nanoseconds or sequence numbers."]]};

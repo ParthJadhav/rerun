@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["DataCellError",""]],"struct":[["DataCell","A cell’s worth of data, i.e. a uniform array of values for a given component type. This is the leaf type in our data model."]],"type":[["DataCellResult",""]]};

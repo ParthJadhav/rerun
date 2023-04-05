@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["query_primary_with_history","Either dispatch to `query_entity_with_primary` or `range_entity_with_primary` depending on whether `ExtraQueryHistory` is set."]]};

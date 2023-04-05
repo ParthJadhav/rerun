@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["ComponentStats",""],["EntityTree","Tree of entity paths, plus components at the leaves."],["TimeHistogramPerTimeline","Number of messages per time per timeline"],["TimesPerTimeline","Number of messages per time per timeline"]],"type":[["TimeHistogram","Number of messages per time"]]};

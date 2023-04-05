@@ -1,0 +1,3 @@
+(function() {var implementors = {
+"re_log":[["impl <a class=\"trait\" href=\"https://docs.rs/log/0.4.17/log/trait.Log.html\" title=\"trait log::Log\">Log</a> for <a class=\"struct\" href=\"re_log/channel_logger/struct.ChannelLogger.html\" title=\"struct re_log::channel_logger::ChannelLogger\">ChannelLogger</a>"],["impl <a class=\"trait\" href=\"https://docs.rs/log/0.4.17/log/trait.Log.html\" title=\"trait log::Log\">Log</a> for <a class=\"struct\" href=\"re_log/multi_logger/struct.MultiLogger.html\" title=\"struct re_log::multi_logger::MultiLogger\">MultiLogger</a>"]]
+};if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

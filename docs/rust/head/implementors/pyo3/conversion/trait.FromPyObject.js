@@ -1,0 +1,3 @@
+(function() {var implementors = {
+"rerun_bindings":[["impl&lt;'source&gt; FromPyObject&lt;'source&gt; for <a class=\"struct\" href=\"rerun_bindings/python_bridge/struct.AnnotationInfoTuple.html\" title=\"struct rerun_bindings::python_bridge::AnnotationInfoTuple\">AnnotationInfoTuple</a>"]]
+};if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

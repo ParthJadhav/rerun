@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["EncodeError","On failure to encode or serialize a [`LogMsg`]."]],"fn":[["encode",""]],"struct":[["Encoder","Encode a stream of [`LogMsg`] into an `.rrd` file."]]};

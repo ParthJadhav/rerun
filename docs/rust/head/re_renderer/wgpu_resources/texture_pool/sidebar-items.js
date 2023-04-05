@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["GpuTextureHandle",""],["GpuTextureInternal",""],["GpuTexturePool",""],["TextureDesc",""]],"type":[["GpuTexture","A reference-counter baked texture. Once all instances are dropped, the texture will be marked for reclamation in the following frame."]]};

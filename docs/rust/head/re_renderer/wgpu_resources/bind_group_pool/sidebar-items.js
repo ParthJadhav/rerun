@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["BindGroupEntry",""]],"struct":[["BindGroupDesc",""],["GpuBindGroup","A reference-counter baked bind group."],["GpuBindGroupHandle",""],["GpuBindGroupPool","Resource pool for bind groups."]]};

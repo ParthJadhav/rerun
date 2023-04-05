@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["RecordingConfig","UI config for the current recording (found in [`LogDb`])."],["ViewerContext","Common things needed by many parts of the viewer."]]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["range_entity_with_primary","Iterates over the rows of any number of components and their respective cluster keys, all from the single point-of-view of the `primary` component, returning an iterator of `EntityView`s."]]};

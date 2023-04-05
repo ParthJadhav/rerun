@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["__populate_example_store","Helper used to create an example store we can use for querying in doctests"],["get_component_with_instances","Retrieves a [`ComponentWithInstances`] from the [`DataStore`]."],["query_entity_with_primary","Retrieve an `EntityView` from the `DataStore`"]]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["ComponentJoinedIterator","Iterator over a single component joined onto a primary component"],["ComponentWithInstances","A type-erased array of [`Component`] values and the corresponding [`InstanceKey`] keys."],["EntityView","A view of an entity at a particular point in time returned by [`crate::get_component_with_instances`]"]]};

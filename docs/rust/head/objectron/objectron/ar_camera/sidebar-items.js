@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["TrackingState","The general quality of position tracking available when the camera captured a frame."],["TrackingStateReason","A possible diagnosis for limited position tracking quality as of when the frame was captured."]],"struct":[["EulerAngles","The orientation of the camera, expressed as roll, pitch, and yaw values."]]};

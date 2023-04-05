@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":[["HASH_RANDOM_STATE",""]],"struct":[["Hash128","128-bit hash. Negligible risk for collision."],["Hash64","64-bit hash."]]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":[["GAP_EXPANSION_FRACTION","How much of the gap use up to expand segments visually to either side?"],["MAX_GAP","The ideal gap between time segments."]],"fn":[["gap_width","Sze of the gap between time segments."]],"struct":[["Segment",""],["TimeRangesUi","Represents a compressed view of time."]]};

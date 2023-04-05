@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["Demo",""]],"fn":[["demo_3d_points",""],["demo_bbox",""],["demo_extension_components",""],["demo_log_cleared",""],["demo_rects",""],["demo_segmentation",""],["demo_text_logs",""],["demo_transforms_3d",""],["main",""],["run",""],["sim_time",""]],"struct":[["Args",""]]};

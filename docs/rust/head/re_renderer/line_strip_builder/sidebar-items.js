@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["LineBatchBuilder",""],["LineStripBuilder",""],["LineStripSeriesBuilder","Builder for a vector of line strips, making it easy to create [`crate::renderer::LineDrawData`]."]]};

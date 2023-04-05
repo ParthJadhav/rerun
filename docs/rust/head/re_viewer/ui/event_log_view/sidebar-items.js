@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["message_table",""],["row_height",""],["table_row",""]],"struct":[["EventLogView","An event log, a table of all log messages."]]};

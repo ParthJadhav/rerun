@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["disabled","A sink that does nothing. All log messages are just dropped."]],"struct":[["BufferedSink","Store log messages in memory until you call [`LogSink::drain_backlog`]."],["DisabledSink",""],["TcpSink","Stream log messages to a Rerun TCP server."]],"trait":[["LogSink","Where the SDK sends its log messages."]]};

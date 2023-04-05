@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["MsgId","A unique id per [`crate::LogMsg`]."]]};

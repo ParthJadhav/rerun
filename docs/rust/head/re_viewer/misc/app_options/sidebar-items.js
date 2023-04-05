@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["AppOptions","Global options for the viewer."]]};

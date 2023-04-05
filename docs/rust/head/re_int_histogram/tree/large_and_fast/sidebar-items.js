@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":[["BOTTOM_LEVEL","The level used for [`DenseLeaf`]."],["LEVEL_STEP","How many bits we progress in each [`BranchNode`]"],["NUM_CHILDREN_IN_DENSE","Number of children in [`DenseLeaf`]."]]};

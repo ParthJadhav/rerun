@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["ComponentPath","A [`EntityPath`] plus a [`ComponentName`]."]]};

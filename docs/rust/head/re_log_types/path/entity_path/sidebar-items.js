@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["EntityPath","`camera / \"left\" / points / #42`"],["EntityPathHash","A 64 bit hash of [`EntityPath`] with very small risk of collision."]]};

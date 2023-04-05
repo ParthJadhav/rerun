@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["BuildInfo","Information about the build of a Rust crate."]]};

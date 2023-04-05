@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["DrawPhase","Determines a (very rough) order of rendering and describes the active [`wgpu::RenderPass`]."]],"mod":[["outlines","Outlines as postprocessing effect."],["picking_layer","GPU driven picking."],["screenshot","Easy screenshot taking."]]};

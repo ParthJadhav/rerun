@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["EditableAutoValue","A value that is either determined automatically by some heuristic, or specified by the user."]]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["ArrowMsg","Message containing an Arrow payload"]]};

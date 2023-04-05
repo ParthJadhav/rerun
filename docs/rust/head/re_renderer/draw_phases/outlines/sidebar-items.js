@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["gpu_data",""]],"struct":[["OutlineConfig",""],["OutlineMaskPreference","What outline (if any) should be drawn."],["OutlineMaskProcessor",""]]};

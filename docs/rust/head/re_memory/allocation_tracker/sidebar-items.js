@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["AllocationTracker","Track the callstacks of allocations."],["CallstackStatistics","Per-callstack statistics."],["PtrHash","A hash of a pointer address."],["ReadableBacktrace","Formatted [`Backtrace`]."]]};

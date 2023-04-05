@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["Chunk","Internal chunk of the staging belt."],["CpuWriteGpuReadBelt","Efficiently performs many buffer writes by sharing and reusing temporary buffers."],["CpuWriteGpuReadBuffer","A sub-allocated staging buffer that can be written to."]]};

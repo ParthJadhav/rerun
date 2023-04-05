@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["DynamicResource",""],["DynamicResourcePool","Generic resource pool for all resources that have varying contents beyond their description."],["DynamicResourcePoolProtectedState",""]],"trait":[["DynamicResourcesDesc",""]]};

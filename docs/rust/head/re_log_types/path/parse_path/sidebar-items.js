@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["PathParseError",""]],"fn":[["parse_entity_path","Parses an entity path, e.g. `foo/bar/#1234/5678/\"string index\"/a6a5e96c-fd52-4d21-a394-ffbb6e5def1d`"],["parse_part",""],["unescape_string",""]]};

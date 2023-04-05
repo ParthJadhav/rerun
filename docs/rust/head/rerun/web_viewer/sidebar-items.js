@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["host_web_viewer","Hosts two servers:"],["new_sink","Serve log-data over WebSockets and serve a Rerun web viewer over HTTP."]],"struct":[["RemoteViewerServer","Hosts two servers:"]]};

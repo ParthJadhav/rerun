@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["bytes_used",""],["global_intern","global interning function."],["hash","Fast but high quality string hash"]],"macro":[["declare_new_type","Declare a newtype wrapper around [`InternedString`] with all the convenience methods you would want."]],"static":[["GLOBAL_INTERNER",""]],"struct":[["InternedString",""],["StringInterner",""]]};

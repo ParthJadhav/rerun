@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["ScreenBackground",""]],"fn":[["fill_view_builder",""],["get_viewport",""],["renderer_paint_callback",""]],"struct":[["ViewBuilderHandle",""]],"type":[["ViewBuilderMap",""]]};

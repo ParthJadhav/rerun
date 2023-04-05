@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["AppIconStatus","In which state the app icon is (as far as we know)."]],"fn":[["setup_app_icon","Sets app icon at runtime."]]};

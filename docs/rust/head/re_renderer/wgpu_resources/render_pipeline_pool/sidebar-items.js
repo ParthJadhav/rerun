@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["sanity_check_vertex_buffers",""]],"struct":[["GpuRenderPipelineHandle",""],["GpuRenderPipelinePool",""],["RenderPipelineDesc","Renderpipeline descriptor, can be converted into [`wgpu::RenderPipeline`] (which isn’t hashable or comparable)"],["VertexBufferLayout","A copy of [`wgpu::VertexBufferLayout`] with a [`smallvec`] for the attributes."]]};

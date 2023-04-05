@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["ChannelLogger","Pipe log messages to a channel."],["LogMsg",""]]};

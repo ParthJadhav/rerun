@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["bytes_resident","According to the OS. This is what matters."]],"struct":[["MemoryUse",""]]};

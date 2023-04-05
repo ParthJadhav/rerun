@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["CalibrationAccuracy","Indicates the calibration accuracy of a magnetic field estimate."]]};

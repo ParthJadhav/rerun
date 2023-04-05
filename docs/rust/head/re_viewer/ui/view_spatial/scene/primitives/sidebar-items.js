@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":[["AXIS_COLOR_X",""],["AXIS_COLOR_Y",""],["AXIS_COLOR_Z",""],["SIZE_BOOST_IN_POINTS_FOR_LINE_OUTLINES",""],["SIZE_BOOST_IN_POINTS_FOR_POINT_OUTLINES",""]],"struct":[["SceneSpatialPrimitives","Primitives sent off to `re_renderer`. (Some meta information still relevant to ui setup as well)"]]};

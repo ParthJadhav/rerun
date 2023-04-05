@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["LatestAtQuery","A query a given time, for a given timeline."],["RangeQuery","A query over a time range, for a given timeline."]]};

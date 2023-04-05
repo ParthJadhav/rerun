@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["ReadbackBeltMetadata","Type used as user data on the gpu readback belt."],["ScreenshotProcessor",""]]};

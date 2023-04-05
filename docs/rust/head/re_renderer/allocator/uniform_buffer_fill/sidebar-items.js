@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["create_and_fill_uniform_buffer","See [`create_and_fill_uniform_buffer`]."],["create_and_fill_uniform_buffer_batch","Utility for fast & efficient creation of uniform buffers from a series of structs."]],"struct":[["UniformBufferAlignmentCheck",""]]};

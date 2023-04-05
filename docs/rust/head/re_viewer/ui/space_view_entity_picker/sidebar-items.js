@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["CanAddToSpaceView","Describes if an entity path can be added to a space view."]],"fn":[["add_entities_line_ui",""],["add_entities_tree_ui",""],["add_entities_ui",""],["create_entity_add_info",""],["title_bar",""]],"struct":[["EntityAddInfo",""],["SpaceViewEntityPicker","Window for adding/removing entities from a space view."]]};

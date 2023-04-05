@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["BatchIndex",""],["Index","The key of a table."]],"struct":[["IndexHash","A 128 bit hash of [`Index`] with negligible risk of collision."]]};

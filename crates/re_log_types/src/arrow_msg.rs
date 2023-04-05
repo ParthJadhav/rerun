@@ -131,13 +131,14 @@ mod tests {
 
     #[test]
     fn arrow_msg_roundtrip() {
-        let row = DataRow::from_cells2(
+        let mut row = DataRow::from_cells2(
             MsgId::random(),
             "world/rects",
             [build_frame_nr(0.into())],
             1,
             (build_some_point2d(1), build_some_rects(1)),
         );
+        row.compute_all_size_bytes();
 
         let table_in = row.into_table();
         let msg_in = table_in.as_arrow_msg().unwrap();
